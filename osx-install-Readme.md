@@ -47,14 +47,16 @@ Build SmartCloud Core
     You can disable the GUI build by passing `--without-gui` to configure.
 
 	prepair export for fix with:
+	```
 		export LDFLAGS=-L/usr/local/opt/openssl/lib
 		export CPPFLAGS=-I/usr/local/opt/openssl/include
-	
+	```
 	then proceed with:
-        ./autogen.sh
+	```
+	   ./autogen.sh
         ./configure
         make
-
+	```
 3.  It is recommended to build and run the unit tests:
 
         make check
