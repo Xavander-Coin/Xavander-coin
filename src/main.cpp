@@ -2116,8 +2116,14 @@ int64_t GetBlockValue(int nHeight)
 	int64_t nSubsidy = 0;
 
 	if (Params().NetworkID() == CBaseChainParams::TESTNET) {
-		if (nHeight < 200 && nHeight > 0)
-			return 250000 * COIN;
+		
+		if (nHeight == 0) {
+			nSubsidy = 4000000 * COIN; //Genesis 4 millions coins for swap
+		}else if (nHeight < 200 && nHeight > 0) { //POW phase 200 coins in this phase
+			nSubsidy = 1 * COIN;
+		}else if (nHeight < 25000 && nHeight > 200) { //Public phase 17.22 days 24,800 coins 
+			nSubsidy = 1 * COIN;
+		}
 	}
 
 	if (IsTreasuryBlock(nHeight)) {
@@ -2125,10 +2131,14 @@ int64_t GetBlockValue(int nHeight)
 		nSubsidy = GetTreasuryAward(nHeight);
 
 	}else {
-		if (nHeight == 0) {
-			nSubsidy = 4000000 * COIN; //Genesis             4 millions coins for swap
-		}else if (nHeight < 200 && nHeight > 0) { //POW phase                   200 coins in this phase
-			nSubsidy = 1 * COIN;
+		if (nHeight <= 40 && nHeight > 0){ //Genesis Block is 0 then 200k coins per block till 20
+            nSubsidy = 100000 * COIN;
+        }else if (nHeight < 200 && nHeight > 40){ //PoW stage 0 coins per block till 200
+			nSubsidy = 0 * COIN;
+		//if (nHeight == 0) {
+		//	nSubsidy = 4000000 * COIN; //Genesis             4 millions coins for swap
+		//}else if (nHeight < 200 && nHeight > 0) { //POW phase                   200 coins in this phase
+		//	nSubsidy = 1 * COIN;
 		}else if (nHeight < 25000 && nHeight > 200) { //Public phase 17.22 days 24,800 coins 
 			nSubsidy = 1 * COIN;
 		}else if (nHeight < 50000 && nHeight > 25000) { //17.36 days            625,000 coins
