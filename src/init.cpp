@@ -489,7 +489,7 @@ std::string HelpMessage(HelpMessageMode mode)
     strUsage += HelpMessageOpt("-enablezeromint=<n>", strprintf(_("Enable automatic Zerocoin minting (0-1, default: %u)"), 1));
     strUsage += HelpMessageOpt("-zeromintpercentage=<n>", strprintf(_("Percentage of automatically minted Zerocoin  (10-100, default: %u)"), 10));
     strUsage += HelpMessageOpt("-preferredDenom=<n>", strprintf(_("Preferred Denomination for automatically minted Zerocoin  (1/5/10/50/100/500/1000/5000), 0 for no preference. default: %u)"), 0));
-    strUsage += HelpMessageOpt("-backupzxxx=<n>", strprintf(_("Enable automatic wallet backups triggered after each zSmrtc minting (0-1, default: %u)"), 1));
+    strUsage += HelpMessageOpt("-backupzsmrtc=<n>", strprintf(_("Enable automatic wallet backups triggered after each zSmrtc minting (0-1, default: %u)"), 1));
 
 //    strUsage += "  -anonymizesmrtcamount=<n>     " + strprintf(_("Keep N SMRTC anonymized (default: %u)"), 0) + "\n";
 //    strUsage += "  -liquidityprovider=<n>       " + strprintf(_("Provide liquidity to Obfuscation by infrequently mixing coins on a continual basis (0-100, default: %u, 1=very frequent, high fees, 100=very infrequent, low fees)"), 0) + "\n";
@@ -1357,10 +1357,10 @@ bool AppInit2(boost::thread_group& threadGroup)
                 // Recalculate money supply for blocks that are impacted by accounting issue after zerocoin activation
                 if (GetBoolArg("-reindexmoneysupply", false)) {
                     if (chainActive.Height() >= Params().Zerocoin_AccumulatorStartHeight()) {
-                        RecalculateZXXXMinted();
-                        RecalculateZXXXSpent();
+                        RecalculateZSMRTCMinted();
+                        RecalculateZSMRTCSpent();
                     }
-                    RecalculateXXXSupply(1);
+                    RecalculateSMRTCSupply(1);
                 }
 
                 // Force recalculation of accumulators.
@@ -1608,8 +1608,8 @@ bool AppInit2(boost::thread_group& threadGroup)
         }
         fVerifyingBlocks = false;
 
-        bool fEnableZXxxBackups = GetBoolArg("-backupzxxx", true);
-        pwalletMain->setZXxxAutoBackups(fEnableZXxxBackups);
+        bool fEnableZSmrtcBackups = GetBoolArg("-backupzsmrtc", true);
+        pwalletMain->setZSmrtcAutoBackups(fEnableZSmrtcBackups);
     }  // (!fDisableWallet)
 #else  // ENABLE_WALLET
     LogPrintf("No wallet compiled in!\n");
@@ -1789,8 +1789,8 @@ bool AppInit2(boost::thread_group& threadGroup)
        is convertable to another.
 
        For example:
-       1XXX+1000 == (.1XXX+100)*10
-       10XXX+10000 == (1XXX+1000)*10
+       1SMRTC+1000 == (.1SMRTC+100)*10
+       10SMRTC+10000 == (1SMRTC+1000)*10
     */
     obfuScationDenominations.push_back((10000 * COIN) + 10000000);
     obfuScationDenominations.push_back((1000 * COIN) + 1000000);

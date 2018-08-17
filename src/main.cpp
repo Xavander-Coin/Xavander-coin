@@ -2899,7 +2899,7 @@ void ThreadScriptCheck()
     scriptcheckqueue.Thread();
 }
 
-void RecalculateZXXXMinted()
+void RecalculateZSMRTCMinted()
 {
     CBlockIndex* pindex = chainActive[Params().Zerocoin_AccumulatorStartHeight()];
     int nHeightEnd = chainActive.Height();
@@ -2931,7 +2931,7 @@ void RecalculateZXXXMinted()
     pblocktree->Flush();
 }
 
-void RecalculateZXXXSpent()
+void RecalculateZSMRTCSpent()
 {
     CBlockIndex* pindex = chainActive[Params().Zerocoin_AccumulatorStartHeight()];
     while (true) {
@@ -2968,7 +2968,7 @@ void RecalculateZXXXSpent()
     pblocktree->Flush();
 }
 
-bool RecalculateXXXSupply(int nHeightStart)
+bool RecalculateSMRTCSupply(int nHeightStart)
 {
     if (nHeightStart > chainActive.Height())
         return false;
@@ -3204,9 +3204,9 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     std::list<libzerocoin::CoinDenomination> listSpends = ZerocoinSpendListFromBlock(block);
 
     if (!fVerifyingBlocks && pindex->nHeight == Params().Zerocoin_StartHeight() + 1) {
-        RecalculateZXXXMinted();
-        RecalculateZXXXSpent();
-        RecalculateXXXSupply(1);
+        RecalculateZSMRTCMinted();
+        RecalculateZSMRTCSpent();
+        RecalculateSMRTCSupply(1);
     }
 
     // Initialize zerocoin supply to the supply from previous block
@@ -3247,7 +3247,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     pindex->nMoneySupply = nMoneySupplyPrev + nValueOut - nValueIn;
     pindex->nMint = pindex->nMoneySupply - nMoneySupplyPrev + nFees;
 
-    //    LogPrintf("XX69----------> ConnectBlock(): nValueOut: %s, nValueIn: %s, nFees: %s, nMint: %s zXxxSpent: %s\n",
+    //    LogPrintf("XX69----------> ConnectBlock(): nValueOut: %s, nValueIn: %s, nFees: %s, nMint: %s zSmrtcSpent: %s\n",
     //              FormatMoney(nValueOut), FormatMoney(nValueIn),
     //              FormatMoney(nFees), FormatMoney(pindex->nMint), FormatMoney(nAmountZerocoinSpent));
 
