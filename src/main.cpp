@@ -2113,42 +2113,63 @@ double ConvertBitsToDouble(unsigned int nBits)
 
 int64_t GetBlockValue(int nHeight)
 {
-    int64_t nSubsidy = 0;
+	int64_t nSubsidy = 0;
 
-    if (Params().NetworkID() == CBaseChainParams::TESTNET) {
-        if (nHeight < 200 && nHeight > 0)
-            return 250000 * COIN;
-    }
+	if (Params().NetworkID() == CBaseChainParams::TESTNET) {
+		
+		if (nHeight == 0) {
+			nSubsidy = 4000000 * COIN; //Genesis 4 millions coins for swap
+		}else if (nHeight < 200 && nHeight > 0) { //POW phase 200 coins in this phase
+			nSubsidy = 1 * COIN;
+		}else if (nHeight < 25000 && nHeight > 200) { //Public phase 17.22 days 24,800 coins 
+			nSubsidy = 1 * COIN;
+		}
+	}
 
-    if (IsTreasuryBlock(nHeight)) {
-        LogPrintf("GetBlockValue(): this is a treasury block\n");
-        nSubsidy = GetTreasuryAward(nHeight);
+	if (IsTreasuryBlock(nHeight)) {
+		LogPrintf("GetBlockValue(): this is a treasury block\n");
+		nSubsidy = GetTreasuryAward(nHeight);
 
-    } else {
-        if (nHeight == 0) {
-            nSubsidy = 4000000 * COIN; //Genesis             
-        } else if (nHeight > 0 && nHeight <= 200) { //POW phase
-            nSubsidy = 1 * COIN;
-        } else if (nHeight > 200 && nHeight <= 25000) { //Public pos and mn phase
-            nSubsidy = 1 * COIN;
-        } else if (nHeight > 25000 && nHeight <= 50000) {
-            nSubsidy = 25 * COIN;
-        } else if (nHeight > 50000 && nHeight <= 75000) {
-            nSubsidy = 50 * COIN;
-        } else if (nHeight > 75000 && nHeight <= 100000) {
-            nSubsidy = 100 * COIN;
-        } else if (nHeight > 100000 && nHeight <= 125000) {
-            nSubsidy = 75 * COIN;
-        } else if (nHeight > 125000 && nHeight <= 150000) {
-            nSubsidy = 50 * COIN;
-        } else if (nHeight > 150000 && nHeight <= 175000) {
-            nSubsidy = 25 * COIN;
-        } else {
-            nSubsidy = 25 * COIN;
-        }
-    }
-    return nSubsidy;
+	}else {
+		if (nHeight <= 40 && nHeight > 0){ //Genesis Block is 0 then 200k coins per block till 20
+            nSubsidy = 100000 * COIN;
+        }else if (nHeight < 200 && nHeight > 40){ //PoW stage 0 coins per block till 200
+			nSubsidy = 0 * COIN;
+		//if (nHeight == 0) {
+		//	nSubsidy = 4000000 * COIN; //Genesis             4 millions coins for swap
+		//}else if (nHeight < 200 && nHeight > 0) { //POW phase                   200 coins in this phase
+		//	nSubsidy = 1 * COIN;
+		}else if (nHeight < 25000 && nHeight > 200) { //Public phase 17.22 days 24,800 coins 
+			nSubsidy = 1 * COIN;
+		}else if (nHeight < 50000 && nHeight > 25000) { //17.36 days            625,000 coins
+			nSubsidy = 25 * COIN;
+		}else if (nHeight < 75000 && nHeight > 50000) { //17.36 days            1,250,000 coins
+			nSubsidy = 50 * COIN;
+		}else if (nHeight < 100000 && nHeight > 75000) { //17.36 days           2,125,000 coins
+			nSubsidy = 85 * COIN;
+		}else if (nHeight < 125000 && nHeight > 100000) { //17.36 days          1,875,000 coins
+			nSubsidy = 75 * COIN;
+		}else if (nHeight < 168000 && nHeight > 125000) { //30 days             2,150,000 coins
+			nSubsidy = 50 * COIN;
+		}else if (nHeight < 297600 && nHeight > 168000) { //90 days             3,240,000 coins
+			nSubsidy = 25 * COIN;
+		}else if (nHeight < 556800 && nHeight > 297600) { //180 days            2,592,000 coins
+			nSubsidy = 10 * COIN;
+		}else if (nHeight < 556800) { //Till max supply           Total coins used 17,882,000   
+			nSubsidy = 5 * COIN;   //57,026.38 days will max supply is reached 
+		}
+		int64_t nMoneySupply = chainActive.Tip()->nMoneySupply;
+
+		if (nMoneySupply + nSubsidy >= Params().MaxMoneyOut())
+			nSubsidy = Params().MaxMoneyOut() - nMoneySupply;
+
+		if (nMoneySupply >= Params().MaxMoneyOut())
+			nSubsidy = 0;
+	}
+	return nSubsidy;
 }
+
+
 
 
 CAmount GetSeeSaw(const CAmount& blockValue, int nMasternodeCount, int nHeight)
@@ -2390,45 +2411,44 @@ int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCou
 {
     int64_t ret = 0;
 
-    if (Params().NetworkID() == CBaseChainParams::TESTNET) {
-        if (nHeight < 200)
-            return 0;
-    }
+   // if (Params().NetworkID() == CBaseChainParams::TESTNET) {
+    //    if (nHeight < 200)
+     //       return 0;
+   // }
 
     // Changes alot and levels out to seesaw at end.
     if (nHeight == 0) {
 	      ret = blockValue * 0;
-    } else if (nHeight > 200 && nHeight <= 25000) {
-    //if (nHeight <= 25000) {
-        ret = blockValue * 0.80; //80% to get new nodes on network on swap until 60k block
-    } else if (nHeight > 25000 && nHeight <= 60000) {
-        ret = blockValue * 0.40; //40% to give new people a chance to stake rewards, will increase every 5k blocks 5000 / 1440 = 3.5 days
-    } else if (nHeight > 60000 && nHeight <= 65000) {
-        ret = blockValue * 0.42; //42% Increase by 2% until it hits 50%
-    } else if (nHeight > 65000 && nHeight <= 70000) {
-        ret = blockValue * 0.44; //44%
-    } else if (nHeight > 70000 && nHeight <= 75000) {
-        ret = blockValue * 0.46; //46%
-    } else if (nHeight > 75000 && nHeight <= 80000) {
-        ret = blockValue * 0.48; //48%
-    } else if (nHeight > 80000 && nHeight <= 85000) {
-        ret = blockValue * 0.50; //50%
-    } else if (nHeight > 85000 && nHeight <= 88000) {
-        ret = blockValue * 0.53; //53% Increase by 3% every 3k blocks until 100k block height
-    } else if (nHeight > 88000 && nHeight <= 91000) {
-        ret = blockValue * 0.56; //56%
-    } else if (nHeight > 91000 && nHeight <= 94000) {
-        ret = blockValue * 0.59; //59%
-    } else if (nHeight > 94000 && nHeight <= 97000) {
-        ret = blockValue * 0.62; //62%
-    } else if (nHeight > 97000 && nHeight <= 100000) {
-        ret = blockValue * 0.65; //65%
-    } else if (nHeight > 100000 && nHeight <= 125000) {
-        ret = blockValue * 0.70; //70% Increase by 5% every 25k blocks until final halving happens, then seesaw comes in.
-    } else if (nHeight > 125000 && nHeight <= 150000) {
-        ret = blockValue * 0.75; //75%
-    } else if (nHeight > 150000 && nHeight <= 175000) {
-        ret = blockValue * 0.80; //80%
+    } else if (nHeight < 25000 && nHeight > 200) {
+        ret = blockValue / 10 * 8; //80% to get new nodes on network on swap until 60k block
+    } else if (nHeight < 60000 && nHeight > 25000) {
+        ret = blockValue / 10 * 4; //40% to give new people a chance to stake rewards, will increase every 5k blocks 5000 / 1440 = 3.5 days
+    } else if (nHeight < 65000 && nHeight > 60000) {
+        ret = blockValue / 10 * 4.2; //42% Increase by 2% until it hits 50%
+    } else if (nHeight < 70000 && nHeight > 65000) {
+        ret = blockValue / 10 * 4.4; //44%
+    } else if (nHeight < 75000 && nHeight > 70000) {
+        ret = blockValue / 10 * 4.6; //46%
+    } else if (nHeight < 80000 && nHeight > 75000) {
+        ret = blockValue / 10 * 4.8; //48%
+    } else if (nHeight < 85000 && nHeight > 80000) {
+        ret = blockValue / 10 * 5; //50%
+    } else if (nHeight < 88000 && nHeight > 85000) {
+        ret = blockValue / 10 * 5.3; //53% Increase by 3% every 3k blocks until 100k block height
+    } else if (nHeight < 91000 && nHeight > 88000) {
+        ret = blockValue / 10 * 5.6; //56%
+    } else if (nHeight < 94000 && nHeight > 91000) {
+        ret = blockValue / 10 * 5.9; //59%
+    } else if (nHeight < 97000 && nHeight > 94000) {
+        ret = blockValue / 10 * 6.2; //62%
+    } else if (nHeight < 100000 && nHeight > 97000) {
+        ret = blockValue / 10 * 6.5; //65%
+    } else if (nHeight < 125000 && nHeight > 100000) {
+        ret = blockValue / 10 * 7; //70% Increase by 5% every 25k blocks until final halving happens, then seesaw comes in.
+    } else if (nHeight < 150000 && nHeight > 125000) {
+        ret = blockValue / 10 * 7.5; //75%
+    } else if (nHeight > 175000 && nHeight <= 150000) {
+        ret = blockValue / 10 * 8; //80%
     } else {
         return GetSeeSaw(blockValue, nMasternodeCount, nHeight); // Start of seesaw rewards
     }
@@ -2436,9 +2456,9 @@ int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCou
     return ret;
 }
 
-//Treasury blocks start from 70,000 and then each block after
-int nStartTreasuryBlock = 70000;
-int nTreasuryBlockStep = 1;
+//Treasury blocks start from 60,000 and then each block after
+int nStartTreasuryBlock = 60000;
+int nTreasuryBlockStep = 1440;
 //Checks to see if block count above is correct if not then no Treasury
 bool IsTreasuryBlock(int nHeight)
 {
@@ -2449,24 +2469,25 @@ bool IsTreasuryBlock(int nHeight)
     else
         return false;
 }
+
 int64_t GetTreasuryAward(int nHeight)
 {
     if (IsTreasuryBlock(nHeight)) {
-        return 10000 * COIN; //10k on very first block 
-    } else if (nHeight > 60000 && nHeight <= 65000) {
-	return 5 * COIN; //5 on start 10%
-    } else if (nHeight > 70001 && nHeight <= 75000) {
-        return 5 * COIN; //5 on start 10%
-    } else if (nHeight > 75000 && nHeight <= 100000) {
-        return 10 * COIN; //10 coins at 10%
-    } else if (nHeight > 100000 && nHeight <= 125000) {
-        return 7.5 * COIN; //7.5 coins at 10%
-    } else if (nHeight > 125000 && nHeight <= 150000) {
-        return 5 * COIN; //5 coins at 10%
-    } else if (nHeight > 150000 && nHeight <= 175000) {
-        return 2.5 * COIN; //2.5 coins at 10%
-    } else if (nHeight >= 175000) {
-        return 2.5 * COIN; //2.5 coins till end at 10%
+        return 7200 * COIN; //7,200 on very first block 
+    } else if (nHeight < 75000 && nHeight > 60000) {
+		return 7200 * COIN; //7,200 aday at 10% 50 coins per block
+    } else if (nHeight < 100000 && nHeight > 75000) {
+        return 12240 * COIN; //12,240 aday at 10% 85 coins per block
+    } else if (nHeight < 125000 && nHeight > 100000) {
+        return 10800 * COIN; //10,800 aday at 10% 75 coins per block
+    } else if (nHeight < 168000 && nHeight > 125000) {
+        return 7200 * COIN; //7,200 aday at 10% 50 coins per block
+    } else if (nHeight < 297600 && nHeight > 168000) {
+        return 3600 * COIN; //3,600 aday at 10% 25 coins per block
+    } else if (nHeight < 556800 && nHeight > 297600) {
+        return 1440 * COIN; //1440 aday at 10% 10 coins per block
+    } else if (nHeight < 556800) {
+        return 720 * COIN; //720 aday at 10% 5 coins per block
     } else {
     }
     return 0;

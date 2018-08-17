@@ -1,9 +1,9 @@
 /* src/config/smrtc-config.h.  Generated from smrtc-config.h.in by configure.  */
 /* src/config/smrtc-config.h.in.  Generated from configure.ac by autoheader.  */
 
-#ifndef XXX_CONFIG_H
+#ifndef SMRTC_CONFIG_H
 
-#define XXX_CONFIG_H
+#define SMRTC_CONFIG_H
 
 /* Define if building universal (internal helper macro) */
 /* #undef AC_APPLE_UNIVERSAL_BUILD */
@@ -220,7 +220,7 @@
 #define HAVE_PTHREAD_PRIO_INHERIT 1
 
 /* Define to 1 to enable trading dialog */
-/* #undef HAVE_QT5 */
+#define HAVE_QT5 1
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #define HAVE_STDINT_H 1
@@ -308,7 +308,7 @@
 #define STRERROR_R_CHAR_P 1
 
 /* Define if dbus support should be compiled in */
-/* #undef USE_DBUS */
+#define USE_DBUS 1
 
 /* Define if QR support should be compiled in */
 /* #undef USE_QRCODE */
@@ -340,4 +340,4 @@
 /* Define for large files, on AIX-style hosts. */
 /* #undef _LARGE_FILES */
 
-#endif //XXX_CONFIG_H
+#endif //SMRTC_CONFIG_H
