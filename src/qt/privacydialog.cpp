@@ -281,14 +281,14 @@ void PrivacyDialog::on_pushButtonSpendzXXX_clicked()
     sendzXXX();
 }
 
-void PrivacyDialog::on_pushButtonZXxxControl_clicked()
+void PrivacyDialog::on_pushButtonZCcbcControl_clicked()
 {
-    ZXxxControlDialog* zXxxControl = new ZXxxControlDialog(this);
+    ZCcbcControlDialog* zXxxControl = new ZCcbcControlDialog(this);
     zXxxControl->setModel(walletModel);
     zXxxControl->exec();
 }
 
-void PrivacyDialog::setZXxxControlLabels(int64_t nAmount, int nQuantity)
+void PrivacyDialog::setZCcbcControlLabels(int64_t nAmount, int nQuantity)
 {
     ui->labelzXxxSelected_int->setText(QString::number(nAmount));
     ui->labelQuantitySelected_int->setText(QString::number(nQuantity));
@@ -398,8 +398,8 @@ void PrivacyDialog::sendzXXX()
 
     // use mints from zSmrtc selector if applicable
     vector<CZerocoinMint> vMintsSelected;
-    if (!ZXxxControlDialog::listSelectedMints.empty()) {
-        vMintsSelected = ZXxxControlDialog::GetSelectedMints();
+    if (!ZCcbcControlDialog::listSelectedMints.empty()) {
+        vMintsSelected = ZCcbcControlDialog::GetSelectedMints();
     }
 
     // Spend zSMRTC
@@ -435,7 +435,7 @@ void PrivacyDialog::sendzXXX()
     }
 
     // Clear zxxx selector in case it was used
-    ZXxxControlDialog::listSelectedMints.clear();
+    ZCcbcControlDialog::listSelectedMints.clear();
 
     // Some statistics for entertainment
     QString strStats = "";
