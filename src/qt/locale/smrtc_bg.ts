@@ -176,7 +176,7 @@
         <translation>Потвърдете шифрирането на портфейла</translation>
     </message>
     <message>
-        <source>Smrtc will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your XXXs from being stolen by malware infecting your computer.</source>
+        <source>Smrtc will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your SMRTCs from being stolen by malware infecting your computer.</source>
         <translation>Smrtc сега ще се затвори, за да довърши процеса по шифриране. Запомнете, че шифрирането на вашия портфейл не може напълно да защити вашия Smrtc от това, да бъде откраднат чрез злонамерен софутуер, инфектирал вашия компютър.</translation>
     </message>
     <message>
@@ -3179,11 +3179,11 @@ Please be patient...</source>
         <translation>Автоматично избрани монети</translation>
     </message>
     <message>
-        <source>If the custom fee is set to 1000 uXXXs and the transaction is only 250 bytes, then "per kilobyte" only pays 250 uXXXs in fee,&lt;br /&gt;while "at least" pays 1000 uXXXs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <source>If the custom fee is set to 1000 uSMRTCs and the transaction is only 250 bytes, then "per kilobyte" only pays 250 uSMRTCs in fee,&lt;br /&gt;while "at least" pays 1000 uSMRTCs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
         <translation>Ако собствената такса е настроена на 1000 uSMRTC и превода е само 250 байта, то тогава "за килобайт" само плаща 250 uSMRTC входяща такса, &lt;br /&gt;докато "минимална сума" плаща 1000 uSMRTC. За транзакции по-големи от килобайт, и двете плащат за килобайт.</translation>
     </message>
     <message>
-        <source>If the custom fee is set to 1000 uXXXs and the transaction is only 250 bytes, then "per kilobyte" only pays 250 uXXXs in fee,&lt;br /&gt;while "total at least" pays 1000 uXXXs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <source>If the custom fee is set to 1000 uSMRTCs and the transaction is only 250 bytes, then "per kilobyte" only pays 250 uSMRTCs in fee,&lt;br /&gt;while "total at least" pays 1000 uSMRTCs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
         <translation>Ако собствената такса е настроена на 1000 uSMRTC и превода е само 250 байта, то тогава "за килобайт" само плаща 250 uSMRTC входяща такса,&lt;br /&gt; докато "минимална сума" плаща 1000 uSMRTC. За транзакции по-големи от килобайт, и двете плащат за килобайт.</translation>
     </message>
     <message>

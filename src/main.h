@@ -373,7 +373,7 @@ bool IsTransactionInChain(uint256 txId, int& nHeightTx);
 bool IsBlockHashInChain(const uint256& hashBlock);
 void RecalculateZSMRTCSpent();
 void RecalculateZSMRTCMinted();
-bool RecalculateXXXSupply(int nHeightStart);
+bool RecalculateSMRTCSupply(int nHeightStart);
 
 
 /**

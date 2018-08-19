@@ -1917,10 +1917,10 @@ void CObfuscationPool::GetDenominationsToString(int nDenom, std::string& strDeno
 {
     // Function returns as follows:
     //
-    // bit 0 - 100XXX+1 ( bit on if present )
-    // bit 1 - 10XXX+1
-    // bit 2 - 1XXX+1
-    // bit 3 - .1XXX+1
+    // bit 0 - 100SMRTC+1 ( bit on if present )
+    // bit 1 - 10SMRTC+1
+    // bit 2 - 1SMRTC+1
+    // bit 3 - .1SMRTC+1
     // bit 3 - non-denom
 
 
@@ -1990,10 +1990,10 @@ int CObfuscationPool::GetDenominations(const std::vector<CTxOut>& vout, bool fSi
 
     // Function returns as follows:
     //
-    // bit 0 - 100XXX+1 ( bit on if present )
-    // bit 1 - 10XXX+1
-    // bit 2 - 1XXX+1
-    // bit 3 - .1XXX+1
+    // bit 0 - 100SMRTC+1 ( bit on if present )
+    // bit 1 - 10SMRTC+1
+    // bit 2 - 1SMRTC+1
+    // bit 3 - .1SMRTC+1
 
     return denom;
 }

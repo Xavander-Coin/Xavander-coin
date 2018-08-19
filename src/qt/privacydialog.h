@@ -76,7 +76,7 @@ private:
 
     int nDisplayUnit;
     bool updateLabel(const QString& address);
-    void sendzXXX();
+    void sendzSMRTC();
 
 private slots:
     void on_payTo_textChanged(const QString& address);
@@ -96,10 +96,10 @@ private slots:
 //    void coinControlClipboardLowOutput();
 //    void coinControlClipboardChange();
 
-    void on_pushButtonMintzXXX_clicked();
+    void on_pushButtonMintzSMRTC_clicked();
     void on_pushButtonMintReset_clicked();
     void on_pushButtonSpentReset_clicked();
-    void on_pushButtonSpendzXXX_clicked();
+    void on_pushButtonSpendzSMRTC_clicked();
     void on_pushButtonZSmrtcControl_clicked();
     void on_pasteButton_clicked();
     void updateDisplayUnit();

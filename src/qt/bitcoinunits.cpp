@@ -67,11 +67,11 @@ QString BitcoinUnits::name(int unit)
     } else {
         switch (unit) {
         case SMRTC:
-            return QString("tXXX");
+            return QString("tSMRTC");
         case mSMRTC:
-            return QString("mtXXX");
+            return QString("mtSMRTC");
         case uSMRTC:
-            return QString::fromUtf8("μtXXX");
+            return QString::fromUtf8("μtSMRTC");
         default:
             return QString("???");
         }
@@ -94,11 +94,11 @@ QString BitcoinUnits::description(int unit)
     } else {
         switch (unit) {
         case SMRTC:
-            return QString("TestXXXs");
+            return QString("TestSMRTCs");
         case mSMRTC:
-            return QString("Milli-TestXXX (1 / 1" THIN_SP_UTF8 "000)");
+            return QString("Milli-TestSMRTC (1 / 1" THIN_SP_UTF8 "000)");
         case uSMRTC:
-            return QString("Micro-TestXXX (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+            return QString("Micro-TestSMRTC (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
         default:
             return QString("???");
         }

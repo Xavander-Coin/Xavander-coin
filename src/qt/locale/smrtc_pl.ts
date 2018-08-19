@@ -583,7 +583,7 @@
     </message>
     <message>
         <source>Open a Smrtc: URI or payment request</source>
-        <translation>OtwórzXXXX: URI i żądanie zapłaty</translation>
+        <translation>OtwórzSMRTCX: URI i żądanie zapłaty</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>

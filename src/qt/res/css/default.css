@@ -694,13 +694,13 @@ QWidget#PrivacyDialog QLabel {
 border:0px solid #000;
 }
 
-QWidget#PrivacyDialog QLabel#zXXXLabel {
+QWidget#PrivacyDialog QLabel#zSMRTCLabel {
 font-size:14px;
 color:#ffffff;
 background-color:#0184CC;
 }
 
-QWidget#PrivacyDialog QLabel#oXXXLabel {
+QWidget#PrivacyDialog QLabel#oSMRTCLabel {
 font-size:14px;
 color:#ffffff;
 background-color:#0184CC;

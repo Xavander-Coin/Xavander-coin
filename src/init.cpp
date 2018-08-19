@@ -1360,7 +1360,7 @@ bool AppInit2(boost::thread_group& threadGroup)
 						RecalculateZSMRTCMinted();
 						RecalculateZSMRTCSpent();
 					}
-					RecalculateXXXSupply(1);
+					RecalculateSMRTCSupply(1);
 				}
 
                 // Force recalculation of accumulators.

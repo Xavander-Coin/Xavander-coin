@@ -32,7 +32,7 @@ SENDANDWAIT="${DIR}/send.sh"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 . "$DIR/util.sh"
 
-D=$(mktemp -d test.XXXXX)
+D=$(mktemp -d test.SMRTCXX)
 
 # Two nodes; one will play the part of merchant, the
 # other an evil transaction-mutating miner.
