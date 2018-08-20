@@ -6,12 +6,12 @@ reset-files.bash
 *.tar.gz
 
 *.exe
-src/adultchain
-src/adultchaind
+src/smrtc
+src/smrtcd
 src/adultchain-cli
 src/adultchain-tx
-src/test/test_adultchain
-src/qt/test/test_adultchain-qt
+src/test/test_smrtc
+src/qt/test/test_smrtc-qt
 
 # autoreconf
 Makefile.in
@@ -37,12 +37,15 @@ confdefs.h
 conftest.cpp
 conftest.err
 libtool
-src/config/adultchain-config.h
-src/config/adultchain-config.h.in
+#src/config/smrtc-config.h
+#src/config/smrtc-config.h.in
 src/config/stamp-h1
 share/setup.nsi
 share/qt/Info.plist
 contrib/devtools/split-debug.sh
+
+#mac files
+dist/
 
 src/univalue/gen
 
@@ -63,7 +66,7 @@ src/qt/test/moc*.cpp
 *.pyc
 *.o
 *.o-*
-.adultchain
+.smrtc
 *.a
 *.pb.cc
 *.pb.h
@@ -82,12 +85,12 @@ src/qt/test/moc*.cpp
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-adultchain-qt
-adultchain-Qt.app
+smrtc-qt
+smrtc-Qt.app
 
 # Unit-tests
 Makefile.test
-adultchain-qt_test
+smrtc-qt_test
 src/test/buildenv.py
 
 # Resources cpp
