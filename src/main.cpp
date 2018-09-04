@@ -80,7 +80,8 @@ bool fVerifyingBlocks = false;
 unsigned int nCoinCacheSize = 5000;
 bool fAlerts = DEFAULT_ALERTS;
 
-unsigned int nStakeMinAge = 60 * 60;
+//unsigned int nStakeMinAge = 60 * 60;
+unsigned int nStakeMinAge = 60 * 2; // 2mins for testing
 int64_t nReserveBalance = 0;
 
 /** Fees smaller than this (in duffs) are considered zero fee (for relaying and mining)
@@ -2117,9 +2118,13 @@ int64_t GetBlockValue(int nHeight)
 
 	if (Params().NetworkID() == CBaseChainParams::TESTNET) {
 		
-		if (nHeight < 10000000000000 && nHeight > 0)
-		return 100 * COIN;
-	
+		if (nHeight <= 40 && nHeight > 0) {
+			return 100000 * COIN;
+		}
+		else if (nHeight < 10000000000000 && nHeight > 40){
+			
+			return 100 * COIN;
+		}
 	}
 
 	if (IsTreasuryBlock(nHeight)) {
