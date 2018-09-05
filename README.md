@@ -23,11 +23,11 @@
 <tr><th>Block Height</th><th>Reward Amount</th><th>Notes</th><th>Duration (Days)</th></tr>
 <tr><td>0-200</td><td>7200000 SMRTC</td><td rowspan=1>Genesis & Initial Premine - for swapped coins Closed Mining</td><td>0.14 Days</td></tr>
 <tr><th colspan=4>PoS / MN Phase</th></tr>
-<tr><td>201-10000</td><td>1 SMRTC</td><td rowspan=1>swapped coins & community setup period</td><td>6.81days</td></tr>
+<tr><td>201-10000</td><td>1 SMRTC</td><td rowspan=1>swapped coins & community setup period</td><td>6.81 days</td></tr>
 <tr><td>10001-150000</td><td>96 SMRTC</td><td rowspan=1>Initial rewards</td><td>97.22 days </td></tr>
 <tr><td>150001-600000</td><td>48 SMRTC</td><td rowspan=1>First Reduction </td><td>312.50 Days</td></tr>
 <tr><td>600001-2400000</td><td>24 SMRTC</td><td rowspan=1>2nd Reduction </td><td>1250.00 Days</td></tr>
-<tr><td>2400001-4728350</td><td>12 SMRTC</td><td rowspan=1>3rd Reduction Till Max Supply </td><td>1616.91 Days Days</td></tr>
+<tr><td>2400001-4728350</td><td>12 SMRTC</td><td rowspan=1>3rd Reduction Till Max Supply </td><td>1616.91 Days</td></tr>
 </table>
 
 
