@@ -56,10 +56,10 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
 // + Contains no strange transactions
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
-    (0, uint256("0x8f3c98793a0f538e8498c07c216273bc365576c76173d4deb5979a644423af96"));
+    (0, uint256("0x65d4997b6b8bf0a0e73df317b837a9b4c75f4cde73fd3e760cf21f01f885e0d9"));
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1535417396, // * UNIX timestamp of last checkpoint block
+    1536130543, // * UNIX timestamp of last checkpoint block
     0,    // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
     2000        // * estimated number of transactions per day after checkpoint, was 2000
@@ -67,19 +67,19 @@ static const Checkpoints::CCheckpointData data = {
 
 static Checkpoints::MapCheckpoints mapCheckpointsTestnet =
     boost::assign::map_list_of
-	(0, uint256("0d521cbc8fb2b2e3fa335e0fa125ac546cec661459da994bf3ce14590b430a5e"));
+	(0, uint256("0x4532966ce69df28dafed59bb8f88ba313a5a0775d6af7f615e617a23b671c9c5"));
 static const Checkpoints::CCheckpointData dataTestnet = {
     &mapCheckpointsTestnet,
-    1534317888,
+    1536130565,
     0,
     250}; //Was 250
 
 static Checkpoints::MapCheckpoints mapCheckpointsRegtest =
     boost::assign::map_list_of
-	(0, uint256("0d521cbc8fb2b2e3fa335e0fa125ac546cec661459da994bf3ce14590b430a5e"));
+	(0, uint256("0x4532966ce69df28dafed59bb8f88ba313a5a0775d6af7f615e617a23b671c9c5"));
 static const Checkpoints::CCheckpointData dataRegtest = {
     &mapCheckpointsRegtest,
-    1534317888,
+    1536130565,
     0,
     100};
     
@@ -99,7 +99,7 @@ public:
     CMainParams()
     {
         networkID = CBaseChainParams::MAIN;
-        vTreasuryRewardAddress = "SexuvG2RSW6NAkHaUG3jnMij3pA9FWMWFo"; //Fill in address once wallet generated
+        vTreasuryRewardAddress = ""; //Fill in address once wallet generated
         strNetworkID = "main";
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -130,7 +130,7 @@ public:
         nModifierUpdateBlock = 1; //Was 999999999
         nZerocoinStartHeight = 201;
         nAccumulatorStartHeight = 1;
-        nZerocoinStartTime = 1535417396; // 07/25/2018 @ 5:45pm (UTC)
+        nZerocoinStartTime = 1536130543; // 07/25/2018 @ 5:45pm (UTC)
         nBlockEnforceSerialRange = 1; //Enforce serial range starting this block
         nBlockRecalculateAccumulators = ~1; //Trigger a recalculation of accumulators
         nBlockFirstFraudulent = ~1; //First block that bad serials emerged
@@ -157,23 +157,23 @@ public:
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime = 1535417396;
+        genesis.nTime = 1536130543;
         genesis.nBits = 0x1e0ffff0;
-        genesis.nNonce = 984941;
+        genesis.nNonce = 1342508;
 
 				
         hashGenesisBlock = genesis.GetHash();
 		
-		printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
-        printf("genesis.hashMerkleRoot = %s\n", genesis.hashMerkleRoot.ToString().c_str());
-        assert(hashGenesisBlock == uint256("0x8f3c98793a0f538e8498c07c216273bc365576c76173d4deb5979a644423af96"));
+		//printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
+        //printf("genesis.hashMerkleRoot = %s\n", genesis.hashMerkleRoot.ToString().c_str());
+        assert(hashGenesisBlock == uint256("0x65d4997b6b8bf0a0e73df317b837a9b4c75f4cde73fd3e760cf21f01f885e0d9"));
         assert(genesis.hashMerkleRoot == uint256("0xa511a95437d4afb62ca1b8b99b39ff36506a8c6fa07bc06b328b404e9c0f9b6b"));
 				
         vSeeds.clear();
 		
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 63); //S
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 68); //C
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 68); //U
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 212);
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x02)(0x2D)(0x27)(0x34).convert_to_container<std::vector<unsigned char> >();
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x02)(0x21)(0x36)(0x2C).convert_to_container<std::vector<unsigned char> >();
@@ -195,7 +195,7 @@ public:
         nPoolMaxTransactions = 3;
         strSporkKey = "0479e900c0e83a7a2b087a9d3fcec09d1ff239f696b055987220a9503d25f7d68178e08c076e51431c948b846a81ec5c12e1fed8c324b31deb546d517e9c9b627c";
         strObfuscationPoolDummyAddress = "XCNAsFGy8k7amqRG26ikKyfVDwK8585Z6b";
-        nStartMasternodePayments = 1535417396; // 
+        nStartMasternodePayments = 1536130543; // 
 
         /** Zerocoin */
         zerocoinModulus = "0xc95577b6dce0049b0a20c779af38079355abadde1a1d80c353f6cb697a7ae5a087bad39caa5798478551d0f9d91e6267716506f32412de1d19d17588765eb9502b85c6a18abdb05791cfd8b734e960281193705eeece210920cc922b3af3ceb178bf12c22eb565d5767fbf19545639be8953c2c38ffad41f3371e4aac750ac2d7bd614b3faabb453081d5d88fdbb803657a980bc93707e4b14233a2358c97763bf28f7c933206071477e8b371f229bc9ce7d6ef0ed7163aa5dfe13bc15f7816348b328fa2c1e69d5c88f7b94cee7829d56d1842d77d7bb8692e9fc7b7db059836500de8d57eb43c345feb58671503b932829112941367996b03871300f25efb5";
@@ -268,13 +268,13 @@ public:
         nBlockLastGoodCheckpoint = 9891730; //Last valid accumulator checkpoint
         
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
-        genesis.nTime = 1534317888;
-        genesis.nNonce = 1532538;
+        genesis.nTime = 1536130565;
+        genesis.nNonce = 946643;
 
 	    hashGenesisBlock = genesis.GetHash();
         //printf("test - genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
         //printf("test - genesis.hashMerkleRoot = %s\n", genesis.hashMerkleRoot.ToString().c_str());
-        assert(hashGenesisBlock == uint256("0d521cbc8fb2b2e3fa335e0fa125ac546cec661459da994bf3ce14590b430a5e"));
+        assert(hashGenesisBlock == uint256("0x4532966ce69df28dafed59bb8f88ba313a5a0775d6af7f615e617a23b671c9c5"));
 		assert(genesis.hashMerkleRoot == uint256("0xa511a95437d4afb62ca1b8b99b39ff36506a8c6fa07bc06b328b404e9c0f9b6b"));
 
         vFixedSeeds.clear();
@@ -305,7 +305,7 @@ public:
         nPoolMaxTransactions = 2;
         strSporkKey = "04a01abe03f4ae3f90be6af7c7c2f12800ce4372ec89f4ae45a01431678868a3955c1557d311516bd377941dfc3c8c7f3c339af348ea9238c717679c83628d52e7";
         strObfuscationPoolDummyAddress = "xp87cG8UEQgzs1Bk67Yk884C7pnQfAeo7q";
-        nStartMasternodePayments = 1534317888; //07/19/2018 @ 11:45am (UTC)
+        nStartMasternodePayments = 1536130565; //07/19/2018 @ 11:45am (UTC)
         nBudget_Fee_Confirmations = 3; // Number of confirmations for the finalization fee. We have to make this very short
                                        // here because we only have a 8 block finalization window on testnet
     }
@@ -335,15 +335,16 @@ public:
         nTargetTimespan = 24 * 60 * 60; // Smrtc: 1 day
         nTargetSpacing = 1 * 60;        // Smrtc: 1 minutes
         bnProofOfWorkLimit = ~uint256(0) >> 1;
-        genesis.nTime = 1534317888;
+        genesis.nTime = 1536130565;
         genesis.nBits = 0x1e0ffff0;
-        genesis.nNonce = 269424;
+        genesis.nNonce = 946643;
 
         hashGenesisBlock = genesis.GetHash();
         nDefaultPort = 19883;
-        printf("regtest - genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
-        //printf("%s\n", hashGenesisBlock.ToString().c_str());
-        assert(hashGenesisBlock == uint256("0x4d3d2bba4b0adda7c4a994680d42332696b30d1b85601a7bbd08aa583ee1c670"));
+        
+		//printf("regtest - genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
+        
+        assert(hashGenesisBlock == uint256("0x4532966ce69df28dafed59bb8f88ba313a5a0775d6af7f615e617a23b671c9c5"));
 		assert(genesis.hashMerkleRoot == uint256("0xa511a95437d4afb62ca1b8b99b39ff36506a8c6fa07bc06b328b404e9c0f9b6b"));
 
         vFixedSeeds.clear(); //! Testnet mode doesn't have any fixed seeds.
