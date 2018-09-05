@@ -99,7 +99,7 @@ public:
     CMainParams()
     {
         networkID = CBaseChainParams::MAIN;
-        vTreasuryRewardAddress = ""; //Fill in address once wallet generated
+        vTreasuryRewardAddress = "UhBX89pxA2VbECvoA27UdbX4MYh92ujsds"; //Fill in address once wallet generated
         strNetworkID = "main";
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -193,7 +193,7 @@ public:
         fHeadersFirstSyncingActive = false;
 
         nPoolMaxTransactions = 3;
-        strSporkKey = "0479e900c0e83a7a2b087a9d3fcec09d1ff239f696b055987220a9503d25f7d68178e08c076e51431c948b846a81ec5c12e1fed8c324b31deb546d517e9c9b627c";
+        strSporkKey = "02d162bfcca964d882cbd94c297f363960e36de40aaf45b17d495d55f567ea46bd";
         strObfuscationPoolDummyAddress = "XCNAsFGy8k7amqRG26ikKyfVDwK8585Z6b";
         nStartMasternodePayments = 1536130543; // 
 
@@ -303,7 +303,7 @@ public:
         fTestnetToBeDeprecatedFieldRPC = true;
 
         nPoolMaxTransactions = 2;
-        strSporkKey = "04a01abe03f4ae3f90be6af7c7c2f12800ce4372ec89f4ae45a01431678868a3955c1557d311516bd377941dfc3c8c7f3c339af348ea9238c717679c83628d52e7";
+        strSporkKey = "02479ed2c3b08d26a13ad65ad45cadfcbeaa192e247d164accce186bb1c487243e";
         strObfuscationPoolDummyAddress = "xp87cG8UEQgzs1Bk67Yk884C7pnQfAeo7q";
         nStartMasternodePayments = 1536130565; //07/19/2018 @ 11:45am (UTC)
         nBudget_Fee_Confirmations = 3; // Number of confirmations for the finalization fee. We have to make this very short
