@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Xavander
+Comment=Xavander P2P Cryptocurrency
+Comment[fr]=Xavander, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Xavander, eşten eşe kriptografik sanal para birimi
+Exec=xavander-qt %u
+Terminal=false
+Type=Application
+Icon=xavander128
+MimeType=x-scheme-handler/xavander;
+Categories=Office;Finance;

@@ -14,7 +14,7 @@
 #include "sendcoinsentry.h"
 #include "walletmodel.h"
 #include "coincontrol.h"
-#include "zsmrtccontroldialog.h"
+#include "zxavandercontroldialog.h"
 #include "spork.h"
 
 #include <QClipboard>
@@ -30,14 +30,14 @@ PrivacyDialog::PrivacyDialog(QWidget* parent) : QDialog(parent),
     nDisplayUnit = 0; // just make sure it's not unitialized
     ui->setupUi(this);
 
-    // "Spending 999999 zSMRTC ought to be enough for anybody." - Bill Gates, 2017
-    ui->zSMRTCpayAmount->setValidator( new QDoubleValidator(0.0, 21000000.0, 20, this) );
+    // "Spending 999999 zXAVANDER ought to be enough for anybody." - Bill Gates, 2017
+    ui->zXAVANDERpayAmount->setValidator( new QDoubleValidator(0.0, 21000000.0, 20, this) );
     ui->labelMintAmountValue->setValidator( new QIntValidator(0, 999999, this) );
 
     // Default texts for (mini-) coincontrol
     ui->labelCoinControlQuantity->setText (tr("Coins automatically selected"));
     ui->labelCoinControlAmount->setText (tr("Coins automatically selected"));
-    ui->labelzSMRTCSyncStatus->setText("(" + tr("out of sync") + ")");
+    ui->labelzXAVANDERSyncStatus->setText("(" + tr("out of sync") + ")");
 
     // Sunken frame for minting messages
     ui->TEMintStatus->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
@@ -66,7 +66,7 @@ PrivacyDialog::PrivacyDialog(QWidget* parent) : QDialog(parent),
     ui->labelzDenom7Text->setText("Denom. with value <b>1000</b>:");
     ui->labelzDenom8Text->setText("Denom. with value <b>5000</b>:");
 
-    // Smrtc settings
+    // Xavander settings
     QSettings settings;
     if (!settings.contains("nSecurityLevel")){
         nSecurityLevel = 42;
@@ -94,11 +94,11 @@ PrivacyDialog::PrivacyDialog(QWidget* parent) : QDialog(parent),
 
     //temporary disable for maintenance
     if(GetAdjustedTime() > GetSporkValue(SPORK_16_ZEROCOIN_MAINTENANCE_MODE)) {
-        ui->pushButtonMintzSMRTC->setEnabled(false);
-        ui->pushButtonMintzSMRTC->setToolTip(tr("zSMRTC is currently disabled due to maintenance."));
+        ui->pushButtonMintzXAVANDER->setEnabled(false);
+        ui->pushButtonMintzXAVANDER->setToolTip(tr("zXAVANDER is currently disabled due to maintenance."));
 
-        ui->pushButtonSpendzSMRTC->setEnabled(false);
-        ui->pushButtonSpendzSMRTC->setToolTip(tr("zSMRTC is currently disabled due to maintenance."));
+        ui->pushButtonSpendzXAVANDER->setEnabled(false);
+        ui->pushButtonSpendzXAVANDER->setToolTip(tr("zXAVANDER is currently disabled due to maintenance."));
     }
 }
 
@@ -137,18 +137,18 @@ void PrivacyDialog::on_addressBookButton_clicked()
     dlg.setModel(walletModel->getAddressTableModel());
     if (dlg.exec()) {
         ui->payTo->setText(dlg.getReturnValue());
-        ui->zSMRTCpayAmount->setFocus();
+        ui->zXAVANDERpayAmount->setFocus();
     }
 }
 
-void PrivacyDialog::on_pushButtonMintzSMRTC_clicked()
+void PrivacyDialog::on_pushButtonMintzXAVANDER_clicked()
 {
     if (!walletModel || !walletModel->getOptionsModel())
         return;
 
     if(GetAdjustedTime() > GetSporkValue(SPORK_16_ZEROCOIN_MAINTENANCE_MODE)) {
         QMessageBox::information(this, tr("Mint Zerocoin"),
-                                 tr("zSMRTC is currently undergoing maintenance."), QMessageBox::Ok,
+                                 tr("zXAVANDER is currently undergoing maintenance."), QMessageBox::Ok,
                                  QMessageBox::Ok);
         return;
     }
@@ -176,7 +176,7 @@ void PrivacyDialog::on_pushButtonMintzSMRTC_clicked()
         return;
     }
 
-    ui->TEMintStatus->setPlainText(tr("Minting ") + ui->labelMintAmountValue->text() + " zSMRTC...");
+    ui->TEMintStatus->setPlainText(tr("Minting ") + ui->labelMintAmountValue->text() + " zXAVANDER...");
     ui->TEMintStatus->repaint ();
 
     int64_t nTime = GetTimeMillis();
@@ -194,7 +194,7 @@ void PrivacyDialog::on_pushButtonMintzSMRTC_clicked()
     double fDuration = (double)(GetTimeMillis() - nTime)/1000.0;
 
     // Minting successfully finished. Show some stats for entertainment.
-    QString strStatsHeader = tr("Successfully minted ") + ui->labelMintAmountValue->text() + tr(" zSMRTC in ") +
+    QString strStatsHeader = tr("Successfully minted ") + ui->labelMintAmountValue->text() + tr(" zXAVANDER in ") +
                              QString::number(fDuration) + tr(" sec. Used denominations:\n");
 
     // Clear amount to avoid double spending when accidentally clicking twice
@@ -253,7 +253,7 @@ void PrivacyDialog::on_pushButtonSpentReset_clicked()
     return;
 }
 
-void PrivacyDialog::on_pushButtonSpendzSMRTC_clicked()
+void PrivacyDialog::on_pushButtonSpendzXAVANDER_clicked()
 {
 
     if (!walletModel || !walletModel->getOptionsModel() || !pwalletMain)
@@ -261,7 +261,7 @@ void PrivacyDialog::on_pushButtonSpendzSMRTC_clicked()
 
     if(GetAdjustedTime() > GetSporkValue(SPORK_16_ZEROCOIN_MAINTENANCE_MODE)) {
         QMessageBox::information(this, tr("Mint Zerocoin"),
-                                 tr("zSMRTC is currently undergoing maintenance."), QMessageBox::Ok, QMessageBox::Ok);
+                                 tr("zXAVANDER is currently undergoing maintenance."), QMessageBox::Ok, QMessageBox::Ok);
         return;
     }
 
@@ -273,24 +273,24 @@ void PrivacyDialog::on_pushButtonSpendzSMRTC_clicked()
             // Unlock wallet was cancelled
             return;
         }
-        // Wallet is unlocked now, sedn zSMRTC
-        sendzSMRTC();
+        // Wallet is unlocked now, sedn zXAVANDER
+        sendzXAVANDER();
         return;
     }
-    // Wallet already unlocked or not encrypted at all, send zSMRTC
-    sendzSMRTC();
+    // Wallet already unlocked or not encrypted at all, send zXAVANDER
+    sendzXAVANDER();
 }
 
-void PrivacyDialog::on_pushButtonZSmrtcControl_clicked()
+void PrivacyDialog::on_pushButtonZXavanderControl_clicked()
 {
-    ZSmrtcControlDialog* zXxxControl = new ZSmrtcControlDialog(this);
-    zXxxControl->setModel(walletModel);
-    zXxxControl->exec();
+    ZXavanderControlDialog* zXavanderControl = new ZXavanderControlDialog(this);
+    zXavanderControl->setModel(walletModel);
+    zXavanderControl->exec();
 }
 
-void PrivacyDialog::setZSmrtcControlLabels(int64_t nAmount, int nQuantity)
+void PrivacyDialog::setZXavanderControlLabels(int64_t nAmount, int nQuantity)
 {
-    ui->labelzXxxSelected_int->setText(QString::number(nAmount));
+    ui->labelzXavanderSelected_int->setText(QString::number(nAmount));
     ui->labelQuantitySelected_int->setText(QString::number(nQuantity));
 }
 
@@ -299,7 +299,7 @@ static inline int64_t roundint64(double d)
     return (int64_t)(d > 0 ? d + 0.5 : d - 0.5);
 }
 
-void PrivacyDialog::sendzSMRTC()
+void PrivacyDialog::sendzXAVANDER()
 {
     QSettings settings;
 
@@ -310,31 +310,31 @@ void PrivacyDialog::sendzSMRTC()
     }
     else{
         if (!address.IsValid()) {
-            QMessageBox::warning(this, tr("Spend Zerocoin"), tr("Invalid Smrtc Address"), QMessageBox::Ok, QMessageBox::Ok);
+            QMessageBox::warning(this, tr("Spend Zerocoin"), tr("Invalid Xavander Address"), QMessageBox::Ok, QMessageBox::Ok);
             ui->payTo->setFocus();
             return;
         }
     }
 
     // Double is allowed now
-    double dAmount = ui->zSMRTCpayAmount->text().toDouble();
+    double dAmount = ui->zXAVANDERpayAmount->text().toDouble();
     CAmount nAmount = roundint64(dAmount* COIN);
 
     // Check amount validity
     if (!MoneyRange(nAmount) || nAmount <= 0.0) {
         QMessageBox::warning(this, tr("Spend Zerocoin"), tr("Invalid Send Amount"), QMessageBox::Ok, QMessageBox::Ok);
-        ui->zSMRTCpayAmount->setFocus();
+        ui->zXAVANDERpayAmount->setFocus();
         return;
     }
 
-    // Convert change to zSMRTC
+    // Convert change to zXAVANDER
     bool fMintChange = ui->checkBoxMintChange->isChecked();
 
     // Persist minimize change setting
     fMinimizeChange = ui->checkBoxMinimizeChange->isChecked();
     settings.setValue("fMinimizeChange", fMinimizeChange);
 
-    // Warn for additional fees if amount is not an integer and change as zSMRTC is requested
+    // Warn for additional fees if amount is not an integer and change as zXAVANDER is requested
     bool fWholeNumber = floor(dAmount) == dAmount;
     double dzFee = 0.0;
 
@@ -343,7 +343,7 @@ void PrivacyDialog::sendzSMRTC()
 
     if(!fWholeNumber && fMintChange){
         QString strFeeWarning = "You've entered an amount with fractional digits and want the change to be converted to Zerocoin.<br /><br /><b>";
-        strFeeWarning += QString::number(dzFee, 'f', 8) + " SMRTC </b>will be added to the standard transaction fees!<br />";
+        strFeeWarning += QString::number(dzFee, 'f', 8) + " XAVANDER </b>will be added to the standard transaction fees!<br />";
         QMessageBox::StandardButton retval = QMessageBox::question(this, tr("Confirm additional Fees"),
             strFeeWarning,
             QMessageBox::Yes | QMessageBox::Cancel,
@@ -351,7 +351,7 @@ void PrivacyDialog::sendzSMRTC()
 
         if (retval != QMessageBox::Yes) {
             // Sending canceled
-            ui->zSMRTCpayAmount->setFocus();
+            ui->zXAVANDERpayAmount->setFocus();
             return;
         }
     }
@@ -370,7 +370,7 @@ void PrivacyDialog::sendzSMRTC()
 
     // General info
     QString strQuestionString = tr("Are you sure you want to send?<br /><br />");
-    QString strAmount = "<b>" + QString::number(dAmount, 'f', 8) + " zSMRTC</b>";
+    QString strAmount = "<b>" + QString::number(dAmount, 'f', 8) + " zXAVANDER</b>";
     QString strAddress = tr(" to address ") + QString::fromStdString(address.ToString()) + strAddressLabel + " <br />";
 
     if(ui->payTo->text().isEmpty()){
@@ -396,13 +396,13 @@ void PrivacyDialog::sendzSMRTC()
     ui->TEMintStatus->setPlainText(tr("Spending Zerocoin.\nComputationally expensive, might need several minutes depending on the selected Security Level and your hardware. \nPlease be patient..."));
     ui->TEMintStatus->repaint();
 
-    // use mints from zSmrtc selector if applicable
+    // use mints from zXavander selector if applicable
     vector<CZerocoinMint> vMintsSelected;
-    if (!ZSmrtcControlDialog::listSelectedMints.empty()) {
-        vMintsSelected = ZSmrtcControlDialog::GetSelectedMints();
+    if (!ZXavanderControlDialog::listSelectedMints.empty()) {
+        vMintsSelected = ZXavanderControlDialog::GetSelectedMints();
     }
 
-    // Spend zSMRTC
+    // Spend zXAVANDER
     CWalletTx wtxNew;
     CZerocoinSpendReceipt receipt;
     bool fSuccess = false;
@@ -418,7 +418,7 @@ void PrivacyDialog::sendzSMRTC()
     // Display errors during spend
     if (!fSuccess) {
         int nNeededSpends = receipt.GetNeededSpends(); // Number of spends we would need for this transaction
-        const int nMaxSpends = Params().Zerocoin_MaxSpendsPerTransaction(); // Maximum possible spends for one zSMRTC transaction
+        const int nMaxSpends = Params().Zerocoin_MaxSpendsPerTransaction(); // Maximum possible spends for one zXAVANDER transaction
         if (nNeededSpends > nMaxSpends) {
             QString strStatusMessage = tr("Too much inputs (") + QString::number(nNeededSpends, 10) + tr(") needed. \nMaximum allowed: ") + QString::number(nMaxSpends, 10);
             strStatusMessage += tr("\nEither mint higher denominations (so fewer inputs are needed) or reduce the amount to spend.");
@@ -429,20 +429,20 @@ void PrivacyDialog::sendzSMRTC()
             QMessageBox::warning(this, tr("Spend Zerocoin"), receipt.GetStatusMessage().c_str(), QMessageBox::Ok, QMessageBox::Ok);
             ui->TEMintStatus->setPlainText(tr("Spend Zerocoin failed with status = ") +QString::number(receipt.GetStatus(), 10) + "\n" + "Message: " + QString::fromStdString(receipt.GetStatusMessage()));
         }
-        ui->zSMRTCpayAmount->setFocus();
+        ui->zXAVANDERpayAmount->setFocus();
         ui->TEMintStatus->repaint();
         return;
     }
 
-    // Clear zsmrtc selector in case it was used
-    ZSmrtcControlDialog::listSelectedMints.clear();
+    // Clear zxavander selector in case it was used
+    ZXavanderControlDialog::listSelectedMints.clear();
 
     // Some statistics for entertainment
     QString strStats = "";
     CAmount nValueIn = 0;
     int nCount = 0;
     for (CZerocoinSpend spend : receipt.GetSpends()) {
-        strStats += tr("zSmrtc Spend #: ") + QString::number(nCount) + ", ";
+        strStats += tr("zXavander Spend #: ") + QString::number(nCount) + ", ";
         strStats += tr("denomination: ") + QString::number(spend.GetDenomination()) + ", ";
         strStats += tr("serial: ") + spend.GetSerial().ToString().c_str() + "\n";
         strStats += tr("Spend is 1 of : ") + QString::number(spend.GetMintCount()) + " mints in the accumulator\n";
@@ -451,13 +451,13 @@ void PrivacyDialog::sendzSMRTC()
 
     CAmount nValueOut = 0;
     for (const CTxOut& txout: wtxNew.vout) {
-        strStats += tr("value out: ") + FormatMoney(txout.nValue).c_str() + " Smrtc, ";
+        strStats += tr("value out: ") + FormatMoney(txout.nValue).c_str() + " Xavander, ";
         nValueOut += txout.nValue;
 
         strStats += tr("address: ");
         CTxDestination dest;
         if(txout.scriptPubKey.IsZerocoinMint())
-            strStats += tr("zSmrtc Mint");
+            strStats += tr("zXavander Mint");
         else if(ExtractDestination(txout.scriptPubKey, dest))
             strStats += tr(CBitcoinAddress(dest).ToString().c_str());
         strStats += "\n";
@@ -472,7 +472,7 @@ void PrivacyDialog::sendzSMRTC()
     strReturn += strStats;
 
     // Clear amount to avoid double spending when accidentally clicking twice
-    ui->zSMRTCpayAmount->setText ("0");
+    ui->zXAVANDERpayAmount->setText ("0");
 
     ui->TEMintStatus->setPlainText(strReturn);
     ui->TEMintStatus->repaint();
@@ -616,7 +616,7 @@ void PrivacyDialog::setBalance(const CAmount& balance, const CAmount& unconfirme
 
         strDenomStats = strUnconfirmed + QString::number(mapDenomBalances.at(denom)) + " x " +
                         QString::number(nCoins) + " = <b>" +
-                        QString::number(nSumPerCoin) + " zSMRTC </b>";
+                        QString::number(nSumPerCoin) + " zXAVANDER </b>";
 
         switch (nCoins) {
             case libzerocoin::CoinDenomination::ZQ_ONE:
@@ -654,9 +654,9 @@ void PrivacyDialog::setBalance(const CAmount& balance, const CAmount& unconfirme
         nLockedBalance = walletModel->getLockedBalance();
     }
 
-    ui->labelzAvailableAmount->setText(QString::number(zerocoinBalance/COIN) + QString(" zSMRTC "));
-    ui->labelzAvailableAmount_2->setText(QString::number(matureZerocoinBalance/COIN) + QString(" zSMRTC "));
-    ui->labelzSMRTCAmountValue->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, balance - immatureBalance - nLockedBalance, false, BitcoinUnits::separatorAlways));
+    ui->labelzAvailableAmount->setText(QString::number(zerocoinBalance/COIN) + QString(" zXAVANDER "));
+    ui->labelzAvailableAmount_2->setText(QString::number(matureZerocoinBalance/COIN) + QString(" zXAVANDER "));
+    ui->labelzXAVANDERAmountValue->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, balance - immatureBalance - nLockedBalance, false, BitcoinUnits::separatorAlways));
 }
 
 void PrivacyDialog::updateDisplayUnit()
@@ -672,7 +672,7 @@ void PrivacyDialog::updateDisplayUnit()
 
 void PrivacyDialog::showOutOfSyncWarning(bool fShow)
 {
-    ui->labelzSMRTCSyncStatus->setVisible(fShow);
+    ui->labelzXAVANDERSyncStatus->setVisible(fShow);
 }
 
 void PrivacyDialog::keyPressEvent(QKeyEvent* event)

@@ -1,9 +1,9 @@
 ![logo](https://smartcloudcoin.ml/wp-content/themes/smartcloudtheme/images/smartcloud_toplogo.png)
 
-### Smrtc is a fork of [PIVX](https://github.com/PIVX-Project/PIVX) that forked [Dash](https://github.com/dashpay/dash) that forked [Bitcoin](https://github.com/bitcoin/bitcoinp)
+### Xavander is a fork of [PIVX](https://github.com/PIVX-Project/PIVX) that forked [Dash](https://github.com/dashpay/dash) that forked [Bitcoin](https://github.com/bitcoin/bitcoinp)
 
 
-# Smrtc Core integration/staging repository
+# Xavander Core integration/staging repository
 
 
 ### Coin Specs
@@ -11,8 +11,8 @@
 <tr><td>Algo</td><td>Quark</td></tr>
 <tr><td>Block Time</td><td>60 Seconds</td></tr>
 <tr><td>Difficulty Retargeting</td><td>Every Block</td></tr>
-<tr><td>Max Coin Supply </td><td>100,000,000 SMRTC</td></tr>
-<tr><td>Premine</td><td>7,200,000 SMRTC for community swapped coins</td></tr>
+<tr><td>Max Coin Supply </td><td>100,000,000 XAVANDER</td></tr>
+<tr><td>Premine</td><td>7,200,000 XAVANDER for community swapped coins</td></tr>
 </table>
 
 
@@ -21,17 +21,17 @@
 <table>
 <th colspan=4>PoW Phase</th>
 <tr><th>Block Height</th><th>Reward Amount</th><th>Notes</th><th>Duration (Days)</th></tr>
-<tr><td>0-200</td><td>7200000 SMRTC</td><td rowspan=1>Genesis & Initial Premine - for swapped coins Closed Mining</td><td>0.14 Days</td></tr>
+<tr><td>0-200</td><td>7200000 XAVANDER</td><td rowspan=1>Genesis & Initial Premine - for swapped coins Closed Mining</td><td>0.14 Days</td></tr>
 <tr><th colspan=4>PoS / MN Phase</th></tr>
-<tr><td>201-10000</td><td>1 SMRTC</td><td rowspan=1>swapped coins & community setup period</td><td>6.81 days</td></tr>
-<tr><td>10001-150000</td><td>96 SMRTC</td><td rowspan=1>Initial rewards</td><td>97.22 days </td></tr>
-<tr><td>150001-600000</td><td>48 SMRTC</td><td rowspan=1>First Reduction </td><td>312.50 Days</td></tr>
-<tr><td>600001-2400000</td><td>24 SMRTC</td><td rowspan=1>2nd Reduction </td><td>1250.00 Days</td></tr>
-<tr><td>2400001-4728350</td><td>12 SMRTC</td><td rowspan=1>3rd Reduction Till Max Supply </td><td>1616.91 Days</td></tr>
+<tr><td>201-10000</td><td>1 XAVANDER</td><td rowspan=1>swapped coins & community setup period</td><td>6.81 days</td></tr>
+<tr><td>10001-150000</td><td>96 XAVANDER</td><td rowspan=1>Initial rewards</td><td>97.22 days </td></tr>
+<tr><td>150001-600000</td><td>48 XAVANDER</td><td rowspan=1>First Reduction </td><td>312.50 Days</td></tr>
+<tr><td>600001-2400000</td><td>24 XAVANDER</td><td rowspan=1>2nd Reduction </td><td>1250.00 Days</td></tr>
+<tr><td>2400001-4728350</td><td>12 XAVANDER</td><td rowspan=1>3rd Reduction Till Max Supply </td><td>1616.91 Days</td></tr>
 </table>
 
 
-### Masternode/PoS/Dev fees Rewards Per Block, 5000 Smrtc Collateral
+### Masternode/PoS/Dev fees Rewards Per Block, 5000 Xavander Collateral
 
 <table>
 <tr><th>Block Height</th><th>MN Reward Amount</th><th>PoS Reward Amount</th><th>Development Fee</th><th>Duration (Days)</th></tr>

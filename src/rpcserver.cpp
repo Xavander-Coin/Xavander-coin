@@ -2,7 +2,7 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017 The Smrtc developers
+// Copyright (c) 2017 The Xavander developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -238,10 +238,10 @@ Value stop(const Array& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "stop\n"
-            "\nStop Smrtc server.");
+            "\nStop Xavander server.");
     // Shutdown will take long enough that the response should get back
     StartShutdown();
-    return "Smrtc server stopping";
+    return "Xavander server stopping";
 }
 
 
@@ -318,36 +318,36 @@ static const CRPCCommand vRPCCommands[] =
         {"hidden", "reconsiderblock", &reconsiderblock, true, true, false},
         {"hidden", "setmocktime", &setmocktime, true, false, false},
 
-        /* Smrtc features */
-        {"smrtc", "masternode", &masternode, true, true, false},
-        {"smrtc", "listmasternodes", &listmasternodes, true, true, false},
-        {"smrtc", "getmasternodecount", &getmasternodecount, true, true, false},
-        {"smrtc", "masternodeconnect", &masternodeconnect, true, true, false},
-        {"smrtc", "masternodecurrent", &masternodecurrent, true, true, false},
-        {"smrtc", "masternodedebug", &masternodedebug, true, true, false},
-        {"smrtc", "startmasternode", &startmasternode, true, true, false},
-        {"smrtc", "createmasternodekey", &createmasternodekey, true, true, false},
-        {"smrtc", "getmasternodeoutputs", &getmasternodeoutputs, true, true, false},
-        {"smrtc", "listmasternodeconf", &listmasternodeconf, true, true, false},
-        {"smrtc", "getmasternodestatus", &getmasternodestatus, true, true, false},
-        {"smrtc", "getmasternodewinners", &getmasternodewinners, true, true, false},
-        {"smrtc", "getmasternodescores", &getmasternodescores, true, true, false},
-        {"smrtc", "mnbudget", &mnbudget, true, true, false},
-        {"smrtc", "preparebudget", &preparebudget, true, true, false},
-        {"smrtc", "submitbudget", &submitbudget, true, true, false},
-        {"smrtc", "mnbudgetvote", &mnbudgetvote, true, true, false},
-        {"smrtc", "getbudgetvotes", &getbudgetvotes, true, true, false},
-        {"smrtc", "getnextsuperblock", &getnextsuperblock, true, true, false},
-        {"smrtc", "getbudgetprojection", &getbudgetprojection, true, true, false},
-        {"smrtc", "getbudgetinfo", &getbudgetinfo, true, true, false},
-        {"smrtc", "mnbudgetrawvote", &mnbudgetrawvote, true, true, false},
-        {"smrtc", "mnfinalbudget", &mnfinalbudget, true, true, false},
-        {"smrtc", "checkbudgets", &checkbudgets, true, true, false},
-        {"smrtc", "mnsync", &mnsync, true, true, false},
-        {"smrtc", "spork", &spork, true, true, false},
-        {"smrtc", "getpoolinfo", &getpoolinfo, true, true, false},
+        /* Xavander features */
+        {"xavander", "masternode", &masternode, true, true, false},
+        {"xavander", "listmasternodes", &listmasternodes, true, true, false},
+        {"xavander", "getmasternodecount", &getmasternodecount, true, true, false},
+        {"xavander", "masternodeconnect", &masternodeconnect, true, true, false},
+        {"xavander", "masternodecurrent", &masternodecurrent, true, true, false},
+        {"xavander", "masternodedebug", &masternodedebug, true, true, false},
+        {"xavander", "startmasternode", &startmasternode, true, true, false},
+        {"xavander", "createmasternodekey", &createmasternodekey, true, true, false},
+        {"xavander", "getmasternodeoutputs", &getmasternodeoutputs, true, true, false},
+        {"xavander", "listmasternodeconf", &listmasternodeconf, true, true, false},
+        {"xavander", "getmasternodestatus", &getmasternodestatus, true, true, false},
+        {"xavander", "getmasternodewinners", &getmasternodewinners, true, true, false},
+        {"xavander", "getmasternodescores", &getmasternodescores, true, true, false},
+        {"xavander", "mnbudget", &mnbudget, true, true, false},
+        {"xavander", "preparebudget", &preparebudget, true, true, false},
+        {"xavander", "submitbudget", &submitbudget, true, true, false},
+        {"xavander", "mnbudgetvote", &mnbudgetvote, true, true, false},
+        {"xavander", "getbudgetvotes", &getbudgetvotes, true, true, false},
+        {"xavander", "getnextsuperblock", &getnextsuperblock, true, true, false},
+        {"xavander", "getbudgetprojection", &getbudgetprojection, true, true, false},
+        {"xavander", "getbudgetinfo", &getbudgetinfo, true, true, false},
+        {"xavander", "mnbudgetrawvote", &mnbudgetrawvote, true, true, false},
+        {"xavander", "mnfinalbudget", &mnfinalbudget, true, true, false},
+        {"xavander", "checkbudgets", &checkbudgets, true, true, false},
+        {"xavander", "mnsync", &mnsync, true, true, false},
+        {"xavander", "spork", &spork, true, true, false},
+        {"xavander", "getpoolinfo", &getpoolinfo, true, true, false},
 #ifdef ENABLE_WALLET
-        {"smrtc", "obfuscation", &obfuscation, false, false, true}, /* not threadSafe because of SendMoney */
+        {"xavander", "obfuscation", &obfuscation, false, false, true}, /* not threadSafe because of SendMoney */
 
         /* Wallet */
         {"wallet", "addmultisigaddress", &addmultisigaddress, true, false, true},
@@ -626,16 +626,16 @@ void StartRPCThreads()
         unsigned char rand_pwd[32];
         GetRandBytes(rand_pwd, 32);
         uiInterface.ThreadSafeMessageBox(strprintf(
-                                             _("To use smrtcd, or the -server option to smrtc-qt, you must set an rpcpassword in the configuration file:\n"
+                                             _("To use xavanderd, or the -server option to xavander-qt, you must set an rpcpassword in the configuration file:\n"
                                                "%s\n"
                                                "It is recommended you use the following random password:\n"
-                                               "rpcuser=smrtcrpc\n"
+                                               "rpcuser=xavanderrpc\n"
                                                "rpcpassword=%s\n"
                                                "(you do not need to remember this password)\n"
                                                "The username and password MUST NOT be the same.\n"
                                                "If the file does not exist, create it with owner-readable-only file permissions.\n"
                                                "It is also recommended to set alertnotify so you are notified of problems;\n"
-                                               "for example: alertnotify=echo %%s | mail -s \"Smrtc Alert\" admin@foo.com\n"),
+                                               "for example: alertnotify=echo %%s | mail -s \"Xavander Alert\" admin@foo.com\n"),
                                              GetConfigFile().string(),
                                              EncodeBase58(&rand_pwd[0], &rand_pwd[0] + 32)),
             "", CClientUIInterface::MSG_ERROR | CClientUIInterface::SECURE);
@@ -1086,14 +1086,14 @@ std::vector<std::string> CRPCTable::listCommands() const
 
 std::string HelpExampleCli(string methodname, string args)
 {
-    return "> smrtc-cli " + methodname + " " + args + "\n";
+    return "> xavander-cli " + methodname + " " + args + "\n";
 }
 
 std::string HelpExampleRpc(string methodname, string args)
 {
     return "> curl --user myusername --data-binary '{\"jsonrpc\": \"1.0\", \"id\":\"curltest\", "
            "\"method\": \"" +
-           methodname + "\", \"params\": [" + args + "] }' -H 'content-type: text/plain;' http://127.0.0.1:19112/\n";
+           methodname + "\", \"params\": [" + args + "] }' -H 'content-type: text/plain;' http://127.0.0.1:39796/\n";
 }
 
 const CRPCTable tableRPC;

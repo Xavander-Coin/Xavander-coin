@@ -1,10 +1,10 @@
 Sample configuration files for:
 
-SystemD: smrtcd.service
-Upstart: smrtcd.conf
-OpenRC:  smrtcd.openrc
-         smrtcd.openrcconf
-CentOS:  smrtcd.init
+SystemD: xavanderd.service
+Upstart: xavanderd.conf
+OpenRC:  xavanderd.openrc
+         xavanderd.openrcconf
+CentOS:  xavanderd.init
 
 have been made available to assist packagers in creating node packages here.
 

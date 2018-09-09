@@ -19,18 +19,18 @@ BitcoinUnits::BitcoinUnits(QObject* parent) : QAbstractListModel(parent),
 QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
 {
     QList<BitcoinUnits::Unit> unitlist;
-    unitlist.append(SMRTC);
-    unitlist.append(mSMRTC);
-    unitlist.append(uSMRTC);
+    unitlist.append(XAVANDER);
+    unitlist.append(mXAVANDER);
+    unitlist.append(uXAVANDER);
     return unitlist;
 }
 
 bool BitcoinUnits::valid(int unit)
 {
     switch (unit) {
-    case SMRTC:
-    case mSMRTC:
-    case uSMRTC:
+    case XAVANDER:
+    case mXAVANDER:
+    case uXAVANDER:
         return true;
     default:
         return false;
@@ -40,12 +40,12 @@ bool BitcoinUnits::valid(int unit)
 QString BitcoinUnits::id(int unit)
 {
     switch (unit) {
-    case SMRTC:
-        return QString("smrtc");
-    case mSMRTC:
-        return QString("msmrtc");
-    case uSMRTC:
-        return QString::fromUtf8("usmrtc");
+    case XAVANDER:
+        return QString("xavander");
+    case mXAVANDER:
+        return QString("mxavander");
+    case uXAVANDER:
+        return QString::fromUtf8("uxavander");
     default:
         return QString("???");
     }
@@ -55,23 +55,23 @@ QString BitcoinUnits::name(int unit)
 {
     if (Params().NetworkID() == CBaseChainParams::MAIN) {
         switch (unit) {
-        case SMRTC:
-            return QString("SMRTC");
-        case mSMRTC:
-            return QString("mSMRTC");
-        case uSMRTC:
-            return QString::fromUtf8("μSMRTC");
+        case XAVANDER:
+            return QString("XAVANDER");
+        case mXAVANDER:
+            return QString("mXAVANDER");
+        case uXAVANDER:
+            return QString::fromUtf8("μXAVANDER");
         default:
             return QString("???");
         }
     } else {
         switch (unit) {
-        case SMRTC:
-            return QString("tSMRTC");
-        case mSMRTC:
-            return QString("mtSMRTC");
-        case uSMRTC:
-            return QString::fromUtf8("μtSMRTC");
+        case XAVANDER:
+            return QString("tXAVANDER");
+        case mXAVANDER:
+            return QString("mtXAVANDER");
+        case uXAVANDER:
+            return QString::fromUtf8("μtXAVANDER");
         default:
             return QString("???");
         }
@@ -82,23 +82,23 @@ QString BitcoinUnits::description(int unit)
 {
     if (Params().NetworkID() == CBaseChainParams::MAIN) {
         switch (unit) {
-        case SMRTC:
-            return QString("SMRTC");
-        case mSMRTC:
-            return QString("Milli-SMRTC (1 / 1" THIN_SP_UTF8 "000)");
-        case uSMRTC:
-            return QString("Micro-SMRTC (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+        case XAVANDER:
+            return QString("XAVANDER");
+        case mXAVANDER:
+            return QString("Milli-XAVANDER (1 / 1" THIN_SP_UTF8 "000)");
+        case uXAVANDER:
+            return QString("Micro-XAVANDER (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
         default:
             return QString("???");
         }
     } else {
         switch (unit) {
-        case SMRTC:
-            return QString("TestSMRTCs");
-        case mSMRTC:
-            return QString("Milli-TestSMRTC (1 / 1" THIN_SP_UTF8 "000)");
-        case uSMRTC:
-            return QString("Micro-TestSMRTC (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+        case XAVANDER:
+            return QString("TestXAVANDERs");
+        case mXAVANDER:
+            return QString("Milli-TestXAVANDER (1 / 1" THIN_SP_UTF8 "000)");
+        case uXAVANDER:
+            return QString("Micro-TestXAVANDER (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
         default:
             return QString("???");
         }
@@ -108,11 +108,11 @@ QString BitcoinUnits::description(int unit)
 qint64 BitcoinUnits::factor(int unit)
 {
     switch (unit) {
-    case SMRTC:
+    case XAVANDER:
         return 100000000;
-    case mSMRTC:
+    case mXAVANDER:
         return 100000;
-    case uSMRTC:
+    case uXAVANDER:
         return 100;
     default:
         return 100000000;
@@ -122,11 +122,11 @@ qint64 BitcoinUnits::factor(int unit)
 int BitcoinUnits::decimals(int unit)
 {
     switch (unit) {
-    case SMRTC:
+    case XAVANDER:
         return 8;
-    case mSMRTC:
+    case mXAVANDER:
         return 5;
-    case uSMRTC:
+    case uXAVANDER:
         return 2;
     default:
         return 0;

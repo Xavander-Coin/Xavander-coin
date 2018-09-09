@@ -2,7 +2,7 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017 The Smrtc developers
+// Copyright (c) 2017 The Xavander developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -56,10 +56,10 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
 // + Contains no strange transactions
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
-    (0, uint256("0x65d4997b6b8bf0a0e73df317b837a9b4c75f4cde73fd3e760cf21f01f885e0d9"));
+    (0, uint256("0x1ba6f70f51ac3d02ff2c2ee0e0db54e0ae15944629fde4e6825aa3c63eb3dc18"));
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1536130543, // * UNIX timestamp of last checkpoint block
+	1536464445, // * UNIX timestamp of last checkpoint block
     0,    // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
     2000        // * estimated number of transactions per day after checkpoint, was 2000
@@ -99,19 +99,19 @@ public:
     CMainParams()
     {
         networkID = CBaseChainParams::MAIN;
-        vTreasuryRewardAddress = "UhBX89pxA2VbECvoA27UdbX4MYh92ujsds"; //Fill in address once wallet generated
+        vTreasuryRewardAddress = ""; //Fill in address once wallet generated or when dev fee is activated (TFinch)
         strNetworkID = "main";
         /**
          * The message start string is designed to be unlikely to occur in normal data.
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 4-byte int at any alignment.
          */
-        pchMessageStart[0] = 0x1d;
-        pchMessageStart[1] = 0xba;
-        pchMessageStart[2] = 0xc2;
-        pchMessageStart[3] = 0x45;
-        vAlertPubKey = ParseHex("047f3dc11e937a81a13c84f3959927ed1cd4de72f3aeac13d398bbe92f0e948254af324d09aeb413ef38af01844b44b5d0b186505f479c02491c3173f5418709ba");
-        nDefaultPort = 9887;
+		pchMessageStart[0] = 0x6b;
+		pchMessageStart[1] = 0x71;
+		pchMessageStart[2] = 0x4a;
+		pchMessageStart[3] = 0x5b;
+        vAlertPubKey = ParseHex("04d9abcf44341dd9d952d92e96f1ba5808c7bbe45f98d17344ca3936a18327b17aceda9dfe0ccb9f7a7ad64b34e2f803a7ad604604509f967c516ba637681c555c");
+        nDefaultPort = 39799;
         bnProofOfWorkLimit = ~uint256(0) >> 1;
         nSubsidyHalvingInterval = 210000;
         nMaxReorganizationDepth = 100;
@@ -119,21 +119,21 @@ public:
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 0;
-        nTargetTimespan = 1 * 60; // Smrtc: 1 day
-        nTargetSpacing = 1 * 60;  // Smrtc: 1 minutes
+        nTargetTimespan = 1 * 60; // Xavander: 1 day
+        nTargetSpacing = 1 * 60;  // Xavander: 1 minutes
         nMaturity = 10; // 10 Conf to mature coins
-        nMasternodeCountDrift = 20; //Was 20
-        nMaxMoneyOut = 100000000 * COIN; //100m coins minted
+        nMasternodeCountDrift = 20;
+        nMaxMoneyOut = 55000000 * COIN;
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 200;
-        nModifierUpdateBlock = 1; //Was 999999999
+        nModifierUpdateBlock = 1;
         nZerocoinStartHeight = 201;
         nAccumulatorStartHeight = 1;
-        nZerocoinStartTime = 1536130543; // 07/25/2018 @ 5:45pm (UTC)
+        nZerocoinStartTime = 1536464445;
         nBlockEnforceSerialRange = 1; //Enforce serial range starting this block
         nBlockRecalculateAccumulators = ~1; //Trigger a recalculation of accumulators
-        nBlockFirstFraudulent = ~1; //First block that bad serials emerged
+        nBlockFirstFraudulent = ~1;
         nBlockLastGoodCheckpoint = ~1; //Last valid accumulator checkpoint
         
         /**
@@ -146,35 +146,35 @@ public:
          *     CTxOut(nValue=50.00000000, scriptPubKey=0xA9037BAC7050C479B121CF)
          *   vMerkleTree: e0028e
          */
-        const char* pszTimestamp = "Genesis of smart cloud, cloud storage for all!";
+        const char* pszTimestamp = "National Suicide Prevention Hotline 1-800-273-8255";
         CMutableTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 486604799 << CScriptNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
         txNew.vout[0].nValue = 50 * COIN;
-        txNew.vout[0].scriptPubKey = CScript() << ParseHex("045bd0bdce28d24cd108384e178afeb2fc9b2d57407d47c7518b629645008afdfbe4639819892ae12958df1374589857914de1f7b3cfea3f73237e58a3ce6227af") << OP_CHECKSIG;
+        txNew.vout[0].scriptPubKey = CScript() << ParseHex("0457c56ed69a1f42398804504fcab82f430cc864c8fc8cd25b76e141d12c13012ee9d500e11f84d5f75f5c669e88ca196142ddb7406d3635d840fa5e9d2a6bb100") << OP_CHECKSIG;
         genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime = 1536130543;
-        genesis.nBits = 0x1e0ffff0;
-        genesis.nNonce = 1342508;
+        genesis.nTime = 1536464445;
+        genesis.nBits = 504365040;
+        genesis.nNonce = 1388564;
 
 				
         hashGenesisBlock = genesis.GetHash();
 		
 		//printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
         //printf("genesis.hashMerkleRoot = %s\n", genesis.hashMerkleRoot.ToString().c_str());
-        assert(hashGenesisBlock == uint256("0x65d4997b6b8bf0a0e73df317b837a9b4c75f4cde73fd3e760cf21f01f885e0d9"));
-        assert(genesis.hashMerkleRoot == uint256("0xa511a95437d4afb62ca1b8b99b39ff36506a8c6fa07bc06b328b404e9c0f9b6b"));
+        assert(hashGenesisBlock == uint256("0x1ba6f70f51ac3d02ff2c2ee0e0db54e0ae15944629fde4e6825aa3c63eb3dc18"));
+        assert(genesis.hashMerkleRoot == uint256("0xa5c288205f9c0004f19a3d7fd717a9efe91e8b5966c1d0c93c9554d4e96dd697"));
 				
         vSeeds.clear();
 		
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 63); //S
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 68); //U
-        base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 212);
+		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 75);
+		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 13);
+		base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 179);
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x02)(0x2D)(0x27)(0x34).convert_to_container<std::vector<unsigned char> >();
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x02)(0x21)(0x36)(0x2C).convert_to_container<std::vector<unsigned char> >();
         // 	BIP44 coin type is from https://github.com/satoshilabs/slips/blob/master/slip-0044.md
@@ -184,7 +184,7 @@ public:
 
         fRequireRPCPassword = true;
         fMiningRequiresPeers = false;
-        fAllowMinDifficultyBlocks = true;
+        fAllowMinDifficultyBlocks = false;
         fDefaultConsistencyChecks = false;
         fRequireStandard = true;
         fMineBlocksOnDemand = false;
@@ -193,9 +193,9 @@ public:
         fHeadersFirstSyncingActive = false;
 
         nPoolMaxTransactions = 3;
-        strSporkKey = "02d162bfcca964d882cbd94c297f363960e36de40aaf45b17d495d55f567ea46bd";
+        strSporkKey = "04dbdd4a4cf673eb0f68ba5b0be427676bb792becd858ece5309d27342ff31899e5c4399317dab53455ec304e0851a1581feb20a1bf6d2dc27843f16b16aba7ebe";
         strObfuscationPoolDummyAddress = "XCNAsFGy8k7amqRG26ikKyfVDwK8585Z6b";
-        nStartMasternodePayments = 1536130543; // 
+        nStartMasternodePayments = 1536464445; 
 
         /** Zerocoin */
         zerocoinModulus = "0xc95577b6dce0049b0a20c779af38079355abadde1a1d80c353f6cb697a7ae5a087bad39caa5798478551d0f9d91e6267716506f32412de1d19d17588765eb9502b85c6a18abdb05791cfd8b734e960281193705eeece210920cc922b3af3ceb178bf12c22eb565d5767fbf19545639be8953c2c38ffad41f3371e4aac750ac2d7bd614b3faabb453081d5d88fdbb803657a980bc93707e4b14233a2358c97763bf28f7c933206071477e8b371f229bc9ce7d6ef0ed7163aa5dfe13bc15f7816348b328fa2c1e69d5c88f7b94cee7829d56d1842d77d7bb8692e9fc7b7db059836500de8d57eb43c345feb58671503b932829112941367996b03871300f25efb5";
@@ -253,8 +253,8 @@ public:
         nRejectBlockOutdatedMajority = 75;
         nToCheckBlockUpgradeMajority = 100;
         nMinerThreads = 0;
-        nTargetTimespan = 1 * 60; // Smrtc: 1 day
-        nTargetSpacing = 1 * 60;  // Smrtc: 1 minute
+        nTargetTimespan = 1 * 60; // Xavander: 1 day
+        nTargetSpacing = 1 * 60;  // Xavander: 1 minute
         nLastPOWBlock = 200;
         nMaturity = 15;
         nMasternodeCountDrift = 4;
@@ -282,14 +282,14 @@ public:
         
 
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 139); // Testnet smrtc addresses start with 'x' or 'y'
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 19);  // Testnet smrtc script addresses start with '8' or '9'
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 139); // Testnet xavander addresses start with 'x' or 'y'
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 19);  // Testnet xavander script addresses start with '8' or '9'
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 239);     // Testnet private keys start with '9' or 'c' (Bitcoin defaults)
-        // Testnet smrtc BIP32 pubkeys start with 'DRKV'
+        // Testnet xavander BIP32 pubkeys start with 'DRKV'
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x3a)(0x80)(0x61)(0xa0).convert_to_container<std::vector<unsigned char> >();
-        // Testnet smrtc BIP32 prvkeys start with 'DRKP'
+        // Testnet xavander BIP32 prvkeys start with 'DRKP'
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x3a)(0x80)(0x58)(0x37).convert_to_container<std::vector<unsigned char> >();
-        // Testnet smrtc BIP44 coin type is '1' (All coin's testnet default)
+        // Testnet xavander BIP44 coin type is '1' (All coin's testnet default)
         base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0x01).convert_to_container<std::vector<unsigned char> >();
 
         convertSeed6(vFixedSeeds, pnSeed6_test, ARRAYLEN(pnSeed6_test));
@@ -332,8 +332,8 @@ public:
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 1;
-        nTargetTimespan = 24 * 60 * 60; // Smrtc: 1 day
-        nTargetSpacing = 1 * 60;        // Smrtc: 1 minutes
+        nTargetTimespan = 24 * 60 * 60; // Xavander: 1 day
+        nTargetSpacing = 1 * 60;        // Xavander: 1 minutes
         bnProofOfWorkLimit = ~uint256(0) >> 1;
         genesis.nTime = 1536130565;
         genesis.nBits = 0x1e0ffff0;

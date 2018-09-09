@@ -1,21 +1,21 @@
 
 Debian
 ====================
-This directory contains files used to package smrtcd/smrtc-qt
-for Debian-based Linux systems. If you compile smrtcd/smrtc-qt yourself, there are some useful files here.
+This directory contains files used to package xavanderd/xavander-qt
+for Debian-based Linux systems. If you compile xavanderd/xavander-qt yourself, there are some useful files here.
 
-## smrtc: URI support ##
+## xavander: URI support ##
 
 
-smrtc-qt.desktop  (Gnome / Open Desktop)
+xavander-qt.desktop  (Gnome / Open Desktop)
 To install:
 
-	sudo desktop-file-install smrtc-qt.desktop
+	sudo desktop-file-install xavander-qt.desktop
 	sudo update-desktop-database
 
 If you build yourself, you will either need to modify the paths in
-the .desktop file or copy or symlink your smrtcqt binary to `/usr/bin`
-and the `../../share/pixmaps/smrtc128.png` to `/usr/share/pixmaps`
+the .desktop file or copy or symlink your xavanderqt binary to `/usr/bin`
+and the `../../share/pixmaps/xavander128.png` to `/usr/share/pixmaps`
 
-smrtc-qt.protocol (KDE)
+xavander-qt.protocol (KDE)
 

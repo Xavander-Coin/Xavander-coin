@@ -35,14 +35,14 @@ If you want to build the disk image with `make deploy` (.dmg / optional), you ne
 Build SmartCloud Core
 ------------------------
 
-1. Clone the SmartCloud Core source code and cd into `smrtc`
+1. Clone the SmartCloud Core source code and cd into `xavander`
 
-        git clone https://github.com/SMRT-Cloud/smrtc.git
-        cd smrtc
+        git clone https://github.com/SMRT-Cloud/xavander.git
+        cd xavander
 
-2.  Build smrtc Core:
+2.  Build xavander Core:
 
-    Configure and build the headless smrtc Core binaries as well as the GUI (if Qt is found).
+    Configure and build the headless xavander Core binaries as well as the GUI (if Qt is found).
 
     You can disable the GUI build by passing `--without-gui` to configure.
 
@@ -68,26 +68,26 @@ Build SmartCloud Core
 Running
 -------
 
-smrtc Core is now available at `./src/smrtcd`
+xavander Core is now available at `./src/xavanderd`
 
 Before running, it's recommended that you create an RPC configuration file.
 
-    echo -e "rpcuser=smrtcrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/smrtc/smrtc.conf"
+    echo -e "rpcuser=xavanderrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/xavander/xavander.conf"
 
-    chmod 600 "/Users/${USER}/Library/Application Support/smrtc/smrtc.conf"
+    chmod 600 "/Users/${USER}/Library/Application Support/xavander/xavander.conf"
 
-The first time you run smrtcd, it will start downloading the blockchain. This process could take several hours.
+The first time you run xavanderd, it will start downloading the blockchain. This process could take several hours.
 
 You can monitor the download process by looking at the debug.log file:
 
-    tail -f $HOME/Library/Application\ Support/smrtc/debug.log
+    tail -f $HOME/Library/Application\ Support/xavander/debug.log
 
 Other commands:
 -------
 
-    ./src/smrtcd -daemon # Starts the smrtc daemon.
-    ./src/smrtc-cli --help # Outputs a list of command-line options.
-    ./src/smrtc-cli help # Outputs a list of RPC commands when the daemon is running.
+    ./src/xavanderd -daemon # Starts the xavander daemon.
+    ./src/xavander-cli --help # Outputs a list of command-line options.
+    ./src/xavander-cli help # Outputs a list of RPC commands when the daemon is running.
 
 Notes
 -----

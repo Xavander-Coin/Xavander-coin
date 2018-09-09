@@ -130,7 +130,7 @@ Value getgenerate(const Array& params, bool fHelp)
         throw runtime_error(
             "getgenerate\n"
             "\nReturn if the server is set to generate coins or not. The default is false.\n"
-            "It is set with the command line argument -gen (or smrtc.conf setting gen)\n"
+            "It is set with the command line argument -gen (or xavander.conf setting gen)\n"
             "It can also be set with the setgenerate call.\n"
             "\nResult\n"
             "true|false      (boolean) If the server is set to generate coins or not\n"
@@ -375,7 +375,7 @@ Value getblocktemplate(const Array& params, bool fHelp)
             "  \"coinbasevalue\" : n,               (numeric) maximum allowable input to coinbase transaction, including the generation award and transaction fees (in duffs)\n"
             "  \"coinbasetxn\" : { ... },           (json object) information for coinbase transaction\n"
             "  \"target\" : \"xxxx\",               (string) The hash target\n"
-            "  \"mintime\" : smrtc,                   (numeric) The minimum timestamp appropriate for next block time in seconds since epoch (Jan 1 1970 GMT)\n"
+            "  \"mintime\" : xavander,                   (numeric) The minimum timestamp appropriate for next block time in seconds since epoch (Jan 1 1970 GMT)\n"
             "  \"mutable\" : [                      (array of string) list of ways the block template may be changed \n"
             "     \"value\"                         (string) A way the block template may be changed, e.g. 'time', 'transactions', 'prevblock'\n"
             "     ,...\n"
@@ -384,9 +384,9 @@ Value getblocktemplate(const Array& params, bool fHelp)
             "  \"sigoplimit\" : n,                 (numeric) limit of sigops in blocks\n"
             "  \"sizelimit\" : n,                  (numeric) limit of block size\n"
             "  \"curtime\" : ttt,                  (numeric) current timestamp in seconds since epoch (Jan 1 1970 GMT)\n"
-            "  \"bits\" : \"smrtc\",                 (string) compressed target of next block\n"
+            "  \"bits\" : \"xavander\",                 (string) compressed target of next block\n"
             "  \"height\" : n                      (numeric) The height of the next block\n"
-            "  \"payee\" : \"smrtc\",                (string) required payee for the next block\n"
+            "  \"payee\" : \"xavander\",                (string) required payee for the next block\n"
             "  \"payee_amount\" : n,               (numeric) required amount to pay\n"
             "  \"votes\" : [\n                     (array) show vote candidates\n"
             "        { ... }                       (json object) vote candidate\n"
@@ -446,10 +446,10 @@ Value getblocktemplate(const Array& params, bool fHelp)
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid mode");
 
     if (vNodes.empty())
-        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "Smrtc is not connected!");
+        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "Xavander is not connected!");
 
     if (IsInitialBlockDownload())
-        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Smrtc is downloading blocks...");
+        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Xavander is downloading blocks...");
 
     static unsigned int nTransactionsUpdatedLast;
 

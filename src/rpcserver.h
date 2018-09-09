@@ -96,7 +96,7 @@ public:
 };
 
 /**
- * Smrtc RPC command dispatcher.
+ * Xavander RPC command dispatcher.
  */
 class CRPCTable
 {

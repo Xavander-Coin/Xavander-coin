@@ -346,7 +346,7 @@ void AddressTableModel::updateEntry(const QString& address,
     const QString& purpose,
     int status)
 {
-    // Update address book model from Smrtc core
+    // Update address book model from Xavander core
     priv->updateEntry(address, label, isMine, purpose, status);
 }
 

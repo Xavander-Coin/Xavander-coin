@@ -66,15 +66,15 @@ bin_PROGRAMS =
 TESTS =
 
 if BUILD_BITCOIND
-  bin_PROGRAMS += smrtcd
+  bin_PROGRAMS += xavanderd
 endif
 
 if BUILD_BITCOIN_UTILS
-  bin_PROGRAMS += smrtc-cli smrtc-tx
+  bin_PROGRAMS += xavander-cli xavander-tx
 endif
 
 .PHONY: FORCE
-# smrtc core #
+# xavander core #
 BITCOIN_CORE_H = \
   activemasternode.h \
   accumulators.h \
@@ -190,7 +190,7 @@ obj/build.h: FORCE
 	  $(abs_top_srcdir)
 libbitcoin_util_a-clientversion.$(OBJEXT): obj/build.h
 
-# server: shared between smrtcd and smrtc-qt
+# server: shared between xavanderd and xavander-qt
 libbitcoin_server_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
 libbitcoin_server_a_SOURCES = \
   addrman.cpp \
@@ -236,7 +236,7 @@ libbitcoin_zmq_a_SOURCES = \
   zmq/zmqpublishnotifier.cpp
 endif
 
-# wallet: shared between smrtcd and smrtc-qt, but only linked
+# wallet: shared between xavanderd and xavander-qt, but only linked
 # when wallet enabled
 
 libbitcoin_wallet_a_CFLAGS = -fPIC
@@ -356,7 +356,7 @@ libzerocoin_libbitcoin_zerocoin_a_SOURCES = \
   libzerocoin/Params.cpp \
   libzerocoin/SerialNumberSignatureOfKnowledge.cpp
 
-# common: shared between smrtcd, and smrtc-qt and non-server tools
+# common: shared between xavanderd, and xavander-qt and non-server tools
 libbitcoin_common_a_CPPFLAGS = $(BITCOIN_INCLUDES)
 libbitcoin_common_a_SOURCES = \
   accumulators.cpp \
@@ -416,7 +416,7 @@ libbitcoin_util_a_SOURCES += compat/glibc_compat.cpp
 libbitcoin_util_a_SOURCES += compat/glibcxx_compat.cpp
 endif
 
-# cli: shared between smrtc-cli and smrtc-qt
+# cli: shared between xavander-cli and xavander-qt
 libbitcoin_cli_a_CPPFLAGS = $(BITCOIN_INCLUDES)
 libbitcoin_cli_a_SOURCES = \
   rpcclient.cpp \
@@ -426,7 +426,7 @@ nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
 # bitcoind binary #
-smrtcd_LDADD = \
+xavanderd_LDADD = \
   $(LIBBITCOIN_SERVER) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UNIVALUE) \
@@ -438,26 +438,26 @@ smrtcd_LDADD = \
   $(LIBSECP256K1)
 
 if ENABLE_ZMQ
-smrtcd_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+xavanderd_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
 endif
 
 if ENABLE_WALLET
-smrtcd_LDADD += libbitcoin_wallet.a
+xavanderd_LDADD += libbitcoin_wallet.a
 endif
-smrtcd_SOURCES = smrtcd.cpp
+xavanderd_SOURCES = xavanderd.cpp
 #
 
 if TARGET_WINDOWS
-smrtcd_SOURCES += smrtcd-res.rc
+xavanderd_SOURCES += xavanderd-res.rc
 endif
 
-smrtcd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
-smrtcd_CPPFLAGS = $(BITCOIN_INCLUDES)
-smrtcd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+xavanderd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
+xavanderd_CPPFLAGS = $(BITCOIN_INCLUDES)
+xavanderd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 
-# smrtc-cli binary #
-smrtc_cli_LDADD = \
+# xavander-cli binary #
+xavander_cli_LDADD = \
   $(LIBBITCOIN_CLI) \
   $(LIBBITCOIN_UTIL) \
   $(BOOST_LIBS) \
@@ -465,14 +465,14 @@ smrtc_cli_LDADD = \
   $(CRYPTO_LIBS) \
   $(EVENT_LIBS)
 
-smrtc_cli_SOURCES = \
-  smrtc-cli.cpp
+xavander_cli_SOURCES = \
+  xavander-cli.cpp
 
-smrtc_cli_CPPFLAGS = $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
+xavander_cli_CPPFLAGS = $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
 #
 
-# smrtc-tx binary #
-smrtc_tx_LDADD = \
+# xavander-tx binary #
+xavander_tx_LDADD = \
   $(LIBBITCOIN_UNIVALUE) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_ZEROCOIN) \
@@ -482,15 +482,15 @@ smrtc_tx_LDADD = \
   $(BOOST_LIBS) \
   $(CRYPTO_LIBS)
 
-smrtc_tx_SOURCES = smrtc-tx.cpp
-smrtc_tx_CPPFLAGS = $(BITCOIN_INCLUDES)
+xavander_tx_SOURCES = xavander-tx.cpp
+xavander_tx_CPPFLAGS = $(BITCOIN_INCLUDES)
 #
-smrtc_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+xavander_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-smrtc_cli_SOURCES += smrtc-cli-res.rc
+xavander_cli_SOURCES += xavander-cli-res.rc
 endif
-smrtc_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+xavander_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if BUILD_BITCOIN_LIBS
 include_HEADERS = script/bitcoinconsensus.h

@@ -22,7 +22,7 @@ SENDANDWAIT="${DIR}/send.sh"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 . "$DIR/util.sh"
 
-D=$(mktemp -d test.SMRTCXX)
+D=$(mktemp -d test.XAVANDERXX)
 
 D1=${D}/node1
 CreateDataDir "$D1" port=11000 rpcport=11001

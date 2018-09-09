@@ -9,8 +9,8 @@
 #include <vector>
 
 /**
- * CBaseChainParams defines the base parameters (shared between smrtc-cli and smrtcd)
- * of a given instance of the Smrtc system.
+ * CBaseChainParams defines the base parameters (shared between xavander-cli and xavanderd)
+ * of a given instance of the Xavander system.
  */
 class CBaseChainParams
 {

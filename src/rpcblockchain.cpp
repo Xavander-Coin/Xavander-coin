@@ -2,7 +2,7 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2018 The Smrtc developers
+// Copyright (c) 2017-2018 The Xavander developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -91,12 +91,12 @@ Object blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool txDe
 
     result.push_back(Pair("moneysupply",ValueFromAmount(blockindex->nMoneySupply)));
 
-    Object zSMRTCObj;
+    Object zXAVANDERObj;
     for (auto denom : libzerocoin::zerocoinDenomList) {
-        zSMRTCObj.push_back(Pair(to_string(denom), ValueFromAmount(blockindex->mapZerocoinSupply.at(denom) * (denom*COIN))));
+        zXAVANDERObj.push_back(Pair(to_string(denom), ValueFromAmount(blockindex->mapZerocoinSupply.at(denom) * (denom*COIN))));
     }
-    zSMRTCObj.emplace_back(Pair("total", ValueFromAmount(blockindex->GetZerocoinSupply())));
-    result.emplace_back(Pair("zSMRTCsupply", zSMRTCObj));
+    zXAVANDERObj.emplace_back(Pair("total", ValueFromAmount(blockindex->GetZerocoinSupply())));
+    result.emplace_back(Pair("zXAVANDERsupply", zXAVANDERObj));
 
     return result;
 }
@@ -176,7 +176,7 @@ Value getrawmempool(const Array& params, bool fHelp)
             "{                           (json object)\n"
             "  \"transactionid\" : {       (json object)\n"
             "    \"size\" : n,             (numeric) transaction size in bytes\n"
-            "    \"fee\" : n,              (numeric) transaction fee in smrtc\n"
+            "    \"fee\" : n,              (numeric) transaction fee in xavander\n"
             "    \"time\" : n,             (numeric) local time transaction entered pool in seconds since 1 Jan 1970 GMT\n"
             "    \"height\" : n,           (numeric) block height when transaction entered pool\n"
             "    \"startingpriority\" : n, (numeric) priority when transaction entered pool\n"
@@ -275,21 +275,21 @@ Value getblock(const Array& params, bool fHelp)
             "  \"time\" : ttt,          (numeric) The block time in seconds since epoch (Jan 1 1970 GMT)\n"
             "  \"nonce\" : n,           (numeric) The nonce\n"
             "  \"bits\" : \"1d00ffff\", (string) The bits\n"
-            "  \"difficulty\" : x.smrtc,  (numeric) The difficulty\n"
+            "  \"difficulty\" : x.xavander,  (numeric) The difficulty\n"
             "  \"previousblockhash\" : \"hash\",  (string) The hash of the previous block\n"
             "  \"nextblockhash\" : \"hash\"       (string) The hash of the next block\n"
             "  \"moneysupply\" : \"supply\"       (numeric) The money supply when this block was added to the blockchain\n"
-            "  \"zSMRTCsupply\" :\n"
+            "  \"zXAVANDERsupply\" :\n"
             "  {\n"
-            "     \"1\" : n,            (numeric) supply of 1 zSMRTC denomination\n"
-            "     \"5\" : n,            (numeric) supply of 5 zSMRTC denomination\n"
-            "     \"10\" : n,           (numeric) supply of 10 zSMRTC denomination\n"
-            "     \"50\" : n,           (numeric) supply of 50 zSMRTC denomination\n"
-            "     \"100\" : n,          (numeric) supply of 100 zSMRTC denomination\n"
-            "     \"500\" : n,          (numeric) supply of 500 zSMRTC denomination\n"
-            "     \"1000\" : n,         (numeric) supply of 1000 zSMRTC denomination\n"
-            "     \"5000\" : n,         (numeric) supply of 5000 zSMRTC denomination\n"
-            "     \"total\" : n,        (numeric) The total supply of all zSMRTC denominations\n"
+            "     \"1\" : n,            (numeric) supply of 1 zXAVANDER denomination\n"
+            "     \"5\" : n,            (numeric) supply of 5 zXAVANDER denomination\n"
+            "     \"10\" : n,           (numeric) supply of 10 zXAVANDER denomination\n"
+            "     \"50\" : n,           (numeric) supply of 50 zXAVANDER denomination\n"
+            "     \"100\" : n,          (numeric) supply of 100 zXAVANDER denomination\n"
+            "     \"500\" : n,          (numeric) supply of 500 zXAVANDER denomination\n"
+            "     \"1000\" : n,         (numeric) supply of 1000 zXAVANDER denomination\n"
+            "     \"5000\" : n,         (numeric) supply of 5000 zXAVANDER denomination\n"
+            "     \"total\" : n,        (numeric) The total supply of all zXAVANDER denominations\n"
             "  }\n"
             "}\n"
             "\nResult (for verbose=false):\n"
@@ -388,7 +388,7 @@ Value gettxoutsetinfo(const Array& params, bool fHelp)
             "  \"txouts\": n,            (numeric) The number of output transactions\n"
             "  \"bytes_serialized\": n,  (numeric) The serialized size\n"
             "  \"hash_serialized\": \"hash\",   (string) The serialized hash\n"
-            "  \"total_amount\": x.smrtc          (numeric) The total amount\n"
+            "  \"total_amount\": x.xavander          (numeric) The total amount\n"
             "}\n"
             "\nExamples:\n" +
             HelpExampleCli("gettxoutsetinfo", "") + HelpExampleRpc("gettxoutsetinfo", ""));
@@ -423,14 +423,14 @@ Value gettxout(const Array& params, bool fHelp)
             "{\n"
             "  \"bestblock\" : \"hash\",    (string) the block hash\n"
             "  \"confirmations\" : n,       (numeric) The number of confirmations\n"
-            "  \"value\" : x.smrtc,           (numeric) The transaction value in btc\n"
+            "  \"value\" : x.xavander,           (numeric) The transaction value in btc\n"
             "  \"scriptPubKey\" : {         (json object)\n"
             "     \"asm\" : \"code\",       (string) \n"
             "     \"hex\" : \"hex\",        (string) \n"
             "     \"reqSigs\" : n,          (numeric) Number of required signatures\n"
             "     \"type\" : \"pubkeyhash\", (string) The type, eg pubkeyhash\n"
-            "     \"addresses\" : [          (array of string) array of smrtc addresses\n"
-            "     \"smrtcaddress\"   	 	(string) smrtc address\n"
+            "     \"addresses\" : [          (array of string) array of xavander addresses\n"
+            "     \"xavanderaddress\"   	 	(string) xavander address\n"
             "        ,...\n"
             "     ]\n"
             "  },\n"
