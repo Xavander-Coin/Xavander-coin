@@ -118,6 +118,10 @@ public:
     int Zerocoin_StartTime() const { return nZerocoinStartTime; }
     int Zerocoin_AccumulatorStartHeight() const { return nAccumulatorStartHeight; }
 
+	//Central Collateral Amount
+	int MasternodeCollateralAmt() const { return nMasternodeCollateralAmt; }
+
+	//Treasury Code
 	std::string vTreasuryRewardAddress;
     
         std::string GetTreasuryRewardAddressAtHeight(int height) const;
@@ -131,6 +135,7 @@ protected:
     //! Raw pub key bytes for the broadcast alert signing key.
     std::vector<unsigned char> vAlertPubKey;
     int nDefaultPort;
+	int nMasternodeCollateralAmt;
     uint256 bnProofOfWorkLimit;
     int nMaxReorganizationDepth;
     int nSubsidyHalvingInterval;

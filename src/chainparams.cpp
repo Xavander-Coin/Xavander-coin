@@ -67,19 +67,19 @@ static const Checkpoints::CCheckpointData data = {
 
 static Checkpoints::MapCheckpoints mapCheckpointsTestnet =
     boost::assign::map_list_of
-	(0, uint256("0x4532966ce69df28dafed59bb8f88ba313a5a0775d6af7f615e617a23b671c9c5"));
+	(0, uint256("0x1ba6f70f51ac3d02ff2c2ee0e0db54e0ae15944629fde4e6825aa3c63eb3dc18"));
 static const Checkpoints::CCheckpointData dataTestnet = {
     &mapCheckpointsTestnet,
-    1536130565,
+	1536464445,
     0,
     250}; //Was 250
 
 static Checkpoints::MapCheckpoints mapCheckpointsRegtest =
     boost::assign::map_list_of
-	(0, uint256("0x4532966ce69df28dafed59bb8f88ba313a5a0775d6af7f615e617a23b671c9c5"));
+	(0, uint256("0x1ba6f70f51ac3d02ff2c2ee0e0db54e0ae15944629fde4e6825aa3c63eb3dc18"));
 static const Checkpoints::CCheckpointData dataRegtest = {
     &mapCheckpointsRegtest,
-    1536130565,
+	1536464445,
     0,
     100};
     
@@ -123,6 +123,7 @@ public:
         nTargetSpacing = 1 * 60;  // Xavander: 1 minutes
         nMaturity = 10; // 10 Conf to mature coins
         nMasternodeCountDrift = 20;
+		nMasternodeCollateralAmt = 10000; //masternode collateral
         nMaxMoneyOut = 55000000 * COIN;
 
         /** Height or Time Based Activations **/
@@ -247,7 +248,7 @@ public:
         pchMessageStart[1] = 0x0c;
         pchMessageStart[2] = 0x6b;
         pchMessageStart[3] = 0xbd;
-        vAlertPubKey = ParseHex("047f3dc11e937a81a13c84f3959927ed1cd4de72f3aeac13d398bbe92f0e948254af324d09aeb413ef38af01844b44b5d0b186505f479c02491c3173f5418709ba");
+        vAlertPubKey = ParseHex("0457c56ed69a1f42398804504fcab82f430cc864c8fc8cd25b76e141d12c13012ee9d500e11f84d5f75f5c669e88ca196142ddb7406d3635d840fa5e9d2a6bb100");
         nDefaultPort = 19887;
         nEnforceBlockUpgradeMajority = 51;
         nRejectBlockOutdatedMajority = 75;
@@ -268,14 +269,14 @@ public:
         nBlockLastGoodCheckpoint = 9891730; //Last valid accumulator checkpoint
         
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
-        genesis.nTime = 1536130565;
-        genesis.nNonce = 946643;
+        genesis.nTime = 1536464445;
+        genesis.nNonce = 1388564;
 
 	    hashGenesisBlock = genesis.GetHash();
         //printf("test - genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
         //printf("test - genesis.hashMerkleRoot = %s\n", genesis.hashMerkleRoot.ToString().c_str());
-        assert(hashGenesisBlock == uint256("0x4532966ce69df28dafed59bb8f88ba313a5a0775d6af7f615e617a23b671c9c5"));
-		assert(genesis.hashMerkleRoot == uint256("0xa511a95437d4afb62ca1b8b99b39ff36506a8c6fa07bc06b328b404e9c0f9b6b"));
+        assert(hashGenesisBlock == uint256("0x1ba6f70f51ac3d02ff2c2ee0e0db54e0ae15944629fde4e6825aa3c63eb3dc18"));
+		assert(genesis.hashMerkleRoot == uint256("0xa5c288205f9c0004f19a3d7fd717a9efe91e8b5966c1d0c93c9554d4e96dd697"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -303,7 +304,7 @@ public:
         fTestnetToBeDeprecatedFieldRPC = true;
 
         nPoolMaxTransactions = 2;
-        strSporkKey = "02479ed2c3b08d26a13ad65ad45cadfcbeaa192e247d164accce186bb1c487243e";
+        strSporkKey = "04dbdd4a4cf673eb0f68ba5b0be427676bb792becd858ece5309d27342ff31899e5c4399317dab53455ec304e0851a1581feb20a1bf6d2dc27843f16b16aba7ebe";
         strObfuscationPoolDummyAddress = "xp87cG8UEQgzs1Bk67Yk884C7pnQfAeo7q";
         nStartMasternodePayments = 1536130565; //07/19/2018 @ 11:45am (UTC)
         nBudget_Fee_Confirmations = 3; // Number of confirmations for the finalization fee. We have to make this very short
@@ -335,17 +336,17 @@ public:
         nTargetTimespan = 24 * 60 * 60; // Xavander: 1 day
         nTargetSpacing = 1 * 60;        // Xavander: 1 minutes
         bnProofOfWorkLimit = ~uint256(0) >> 1;
-        genesis.nTime = 1536130565;
-        genesis.nBits = 0x1e0ffff0;
-        genesis.nNonce = 946643;
+        genesis.nTime = 1536464445;
+        genesis.nBits = 504365040;
+        genesis.nNonce = 1388564;
 
         hashGenesisBlock = genesis.GetHash();
         nDefaultPort = 19883;
         
 		//printf("regtest - genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
         
-        assert(hashGenesisBlock == uint256("0x4532966ce69df28dafed59bb8f88ba313a5a0775d6af7f615e617a23b671c9c5"));
-		assert(genesis.hashMerkleRoot == uint256("0xa511a95437d4afb62ca1b8b99b39ff36506a8c6fa07bc06b328b404e9c0f9b6b"));
+        assert(hashGenesisBlock == uint256("0x1ba6f70f51ac3d02ff2c2ee0e0db54e0ae15944629fde4e6825aa3c63eb3dc18"));
+		assert(genesis.hashMerkleRoot == uint256("0xa5c288205f9c0004f19a3d7fd717a9efe91e8b5966c1d0c93c9554d4e96dd697"));
 
         vFixedSeeds.clear(); //! Testnet mode doesn't have any fixed seeds.
         vSeeds.clear();      //! Testnet mode doesn't have any DNS seeds.
