@@ -226,10 +226,10 @@ QT_TRANSLATE_NOOP("xavander-core", ""
 QT_TRANSLATE_NOOP("xavander-core", ""
 "You must specify a masternodeprivkey in the configuration. Please see "
 "documentation for help."),
-QT_TRANSLATE_NOOP("xavander-core", "(39799 could be used only on mainnet)"),
+QT_TRANSLATE_NOOP("xavander-core", "(35550 could be used only on mainnet)"),
 QT_TRANSLATE_NOOP("xavander-core", "(default: %s)"),
 QT_TRANSLATE_NOOP("xavander-core", "(default: 1)"),
-QT_TRANSLATE_NOOP("xavander-core", "(must be 39799 for mainnet)"),
+QT_TRANSLATE_NOOP("xavander-core", "(must be 35550 for mainnet)"),
 QT_TRANSLATE_NOOP("xavander-core", "<category> can be:"),
 QT_TRANSLATE_NOOP("xavander-core", "Accept command line and JSON-RPC commands"),
 QT_TRANSLATE_NOOP("xavander-core", "Accept connections from outside (default: 1 if no -proxy or -connect)"),
