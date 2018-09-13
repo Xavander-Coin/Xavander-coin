@@ -31,15 +31,15 @@
 </table>
 
 
-### Masternode/PoS/Dev fees Rewards Per Block, 5000 Xavander Collateral
+### Masternode/PoS/Dev fees Rewards Per Block, 10000 Xavander Collateral
 
 <table>
 <tr><th>Block Height</th><th>MN Reward Amount</th><th>PoS Reward Amount</th><th>Development Fee</th><th>Duration (Days)</th></tr>
 <tr><td>0-200</td><td>0%</td><td>0%</td><td>0%</td><td>0.14 Days</td></tr>
-<tr><td>201-10000</td><td>65%</td><td>25%</td><td>0%</td><td>6.81 Days</td></tr>
-<tr><td>10001-60000</td><td>65%</td><td>25%</td><td>0%</td><td>34.72 Days</td></tr>
-<tr><td>60001-150000</td><td>65%</td><td>25%</td><td>10%</td><td>62.50 Days</td></tr>
-<tr><td>150001-600000</td><td>65%</td><td>25%</td><td>10%</td><td>312.50 Days</td></tr>
-<tr><td>600001-2400000</td><td>65%</td><td>25%</td><td>10%</td><td>1250.00 Days</td></tr>
-<tr><td>2400001-4728350</td><td>65%</td><td>25%</td><td>10%</td><td>1616.91 Days</td></tr>
+<tr><td>201-10000</td><td>90%</td><td>10%</td><td>0%</td><td>6.81 Days</td></tr>
+<tr><td>10001-60000</td><td>90%</td><td>10%</td><td>0%</td><td>34.72 Days</td></tr>
+<tr><td>60001-150000</td><td>90%</td><td>10%</td><td>0%</td><td>62.50 Days</td></tr>
+<tr><td>150001-600000</td><td>90%</td><td>10%</td><td>0%</td><td>312.50 Days</td></tr>
+<tr><td>600001-2400000</td><td>90%</td><td>10%</td><td>0%</td><td>1250.00 Days</td></tr>
+<tr><td>2400001-4728350</td><td>90%</td><td>10%</td><td>0%</td><td>1616.91 Days</td></tr>
 </table>
