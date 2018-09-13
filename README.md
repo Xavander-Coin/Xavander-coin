@@ -1,4 +1,4 @@
-![logo](https://smartcloudcoin.ml/wp-content/themes/smartcloudtheme/images/smartcloud_toplogo.png)
+![logo](https://github.com/Xavander-Coin/Xavander-coin/blob/master/src/qt/res/images/xavander_logo_horizontal.png)
 
 ### Xavander is a fork of [PIVX](https://github.com/PIVX-Project/PIVX) that forked [Dash](https://github.com/dashpay/dash) that forked [Bitcoin](https://github.com/bitcoin/bitcoinp)
 
