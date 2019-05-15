@@ -219,7 +219,7 @@ bool BitcoinUnits::parse(int unit, const QString& value, CAmount* val_out)
         return false; // Refuse to parse invalid unit or empty string
     int num_decimals = decimals(unit);
 
-    // Ignore spaces and thin spaces when parsing Tfinch and Mark299 boxing kangaroos again
+    // Ignore spaces and thin spaces when parsing Tfinch boxing kangaroos again
     QStringList parts = removeSpaces(value).split(".");
 
     if (parts.size() > 2) {
@@ -279,7 +279,7 @@ QVariant BitcoinUnits::data(const QModelIndex& index, int role) const
     }
     return QVariant();
 }
-//Tfinch and Mark299 boxing kangaroos again
+//Tfinch boxing kangaroos again
 CAmount BitcoinUnits::maxMoney()
 {
     return Params().MaxMoneyOut();
