@@ -109,10 +109,10 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 4-byte int at any alignment.
          */
-		pchMessageStart[0] = 0x6b;
-		pchMessageStart[1] = 0x71;
-		pchMessageStart[2] = 0x4a;
-		pchMessageStart[3] = 0x5b;
+	pchMessageStart[0] = 0x6b;
+	pchMessageStart[1] = 0x71;
+	pchMessageStart[2] = 0x4a;
+	pchMessageStart[3] = 0x5b;
         vAlertPubKey = ParseHex("04d9abcf44341dd9d952d92e96f1ba5808c7bbe45f98d17344ca3936a18327b17aceda9dfe0ccb9f7a7ad64b34e2f803a7ad604604509f967c516ba637681c555c");
         nDefaultPort = 35550;
         bnProofOfWorkLimit = ~uint256(0) >> 1;
@@ -126,9 +126,7 @@ public:
         nTargetSpacing = 1 * 60;  // Xavander: 1 minutes
         nMaturity = 10; // 10 Conf to mature coins
         nMasternodeCountDrift = 20;
-		nMasternodeCollateralAmt = 10000; //masternode collateral
-        nEnforceNewSporkKey = 1546300800; //!> Sporks signed after (GMT): Tuesday, Jan 1, 2018 12:00:00 AM GMT must use the new spork key
-        nRejectOldSporkKey = 1548979200;  //!> Fully reject old spork key after (GMT): Friday, Feb 1, 2018 12:00:00 AM
+	nMasternodeCollateralAmt = 10000; //masternode collateral
         nMaxMoneyOut = 55000000 * COIN;
 
         /** Height or Time Based Activations **/
@@ -170,7 +168,7 @@ public:
 				
         hashGenesisBlock = genesis.GetHash();
 		
-		//printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
+	//printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
         //printf("genesis.hashMerkleRoot = %s\n", genesis.hashMerkleRoot.ToString().c_str());
         assert(hashGenesisBlock == uint256("0x1ba6f70f51ac3d02ff2c2ee0e0db54e0ae15944629fde4e6825aa3c63eb3dc18"));
         assert(genesis.hashMerkleRoot == uint256("0xa5c288205f9c0004f19a3d7fd717a9efe91e8b5966c1d0c93c9554d4e96dd697"));
@@ -178,12 +176,12 @@ public:
         vSeeds.clear();
 		
 
-		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 75);
-		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 13);
-		base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 179);
+	base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 75);
+	base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 13);
+	base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 179);
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x02)(0x2D)(0x27)(0x34).convert_to_container<std::vector<unsigned char> >();
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x02)(0x21)(0x36)(0x2C).convert_to_container<std::vector<unsigned char> >();
-        // 	BIP44 coin type is from https://github.com/satoshilabs/slips/blob/master/slip-0044.md
+        //BIP44 coin type is from https://github.com/satoshilabs/slips/blob/master/slip-0044.md
         base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0x77).convert_to_container<std::vector<unsigned char> >();
 
         convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
@@ -199,8 +197,8 @@ public:
         fHeadersFirstSyncingActive = false;
 
         nPoolMaxTransactions = 3;
-		nEnforceNewSporkKey = 1557878400; //!> Sporks signed after 05/15/2019 @ 12:00am (UTC) must use the new spork key
-		nRejectOldSporkKey = 1557792000;  //!> Fully reject old spork key after 05/14/2019 @ 12:00am (UTC)
+        nEnforceNewSporkKey = 1560384000; //!> Sporks signed after 06/13/2019 @ 12:00am (UTC)
+        nRejectOldSporkKey = 1560556800;  //!> Fully reject old spork key after 06/15/2019 @ 12:00am (UTC)
         strSporkKey = "0279d5e624dff289b3ef1f05d53a328a301f81db61d7da5e463fdd64c3dcda5c62";
         strSporkKeyOld = "02085fb93df4c4bf6ac7b88452963d66b7a52b65ed801fdc58909d651fb2035e51";
         strObfuscationPoolDummyAddress = "XCNAsFGy8k7amqRG26ikKyfVDwK8585Z6b";
