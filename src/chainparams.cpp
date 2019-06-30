@@ -202,8 +202,8 @@ public:
         fHeadersFirstSyncingActive = false;
 
         nPoolMaxTransactions = 3;
-        nEnforceNewSporkKey = 1560384000; //!> Sporks signed after 06/13/2019 @ 12:00am (UTC)
-        nRejectOldSporkKey = 1560556800;  //!> Fully reject old spork key after 06/15/2019 @ 12:00am (UTC)
+        nEnforceNewSporkKey = 1561931967; //!> Sporks signed after 06/30/2019 @ 9:59pm (UTC)
+        nRejectOldSporkKey = 1562716800;  //!> Fully reject old spork key after 07/10/2019 @ 12:00am (UTC)
         strSporkKey = "0279d5e624dff289b3ef1f05d53a328a301f81db61d7da5e463fdd64c3dcda5c62";
         strSporkKeyOld = "02085fb93df4c4bf6ac7b88452963d66b7a52b65ed801fdc58909d651fb2035e51";
         strObfuscationPoolDummyAddress = "XCNAsFGy8k7amqRG26ikKyfVDwK8585Z6b";
