@@ -26,6 +26,7 @@
 /**
  * Copyright year (2009-this)
  * Todo: update this when changing our copyright comments in the source
+ * Tfinch
  */
 #define COPYRIGHT_YEAR 2017
 

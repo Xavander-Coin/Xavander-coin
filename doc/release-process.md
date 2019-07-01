@@ -26,7 +26,7 @@ Check out the source code in the following directory hierarchy.
     git clone https://github.com/eastcoastcrypto/gitian.sigs.git
     git clone https://github.com/eastcoastcrypto/xavander-detached-sigs.git
     git clone https://github.com/devrandom/gitian-builder.git
-    git clone https://github.com/eastcoastcrypto/xavander.git
+    git clone https://github.com/eastcoastcrypto/Xavander-coin.git
 
 ### Xavander maintainers/release engineers, suggestion for writing release notes
 

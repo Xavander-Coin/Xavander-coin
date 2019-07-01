@@ -22,9 +22,9 @@ Build-Depends: debhelper,
  libqrencode-dev,
  libprotobuf-dev, protobuf-compiler
 Standards-Version: 3.9.2
-Homepage: http://www.xavander.org
-Vcs-Git: git://github.com/SMRT2/xavander.git
-Vcs-Browser: http://github.com/SMRT2/xavander
+Homepage: http://www.xavandercoin.com/
+Vcs-Git: git://github.com/Xavander-Coin/Xavander-coin.git
+Vcs-Browser: https://github.com/Xavander-Coin/xavander
 
 Package: xavanderd
 Architecture: any
