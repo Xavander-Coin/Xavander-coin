@@ -7,7 +7,7 @@ architectures:
 packages:
 - "faketime"
 remotes:
-- "url": "https://github.com/SMRT2/smrt-detached-sigs.git"
+- "url": "https://github.com/Xavander-Coin/Xavander-detached-sigs.git"
   "dir": "signature"
 files:
 - "xavander-osx-unsigned.tar.gz"

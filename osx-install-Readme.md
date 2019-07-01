@@ -37,7 +37,7 @@ Build SmartCloud Core
 
 1. Clone the SmartCloud Core source code and cd into `xavander`
 
-        git clone https://github.com/SMRT-Cloud/xavander.git
+        git clone https://github.com/SMRT-Cloud/Xavander-coin.git
         cd xavander
 
 2.  Build xavander Core:
