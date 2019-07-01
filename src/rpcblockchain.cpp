@@ -96,7 +96,7 @@ Object blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool txDe
         zXAVANDERObj.push_back(Pair(to_string(denom), ValueFromAmount(blockindex->mapZerocoinSupply.at(denom) * (denom*COIN))));
     }
     zXAVANDERObj.emplace_back(Pair("total", ValueFromAmount(blockindex->GetZerocoinSupply())));
-    result.emplace_back(Pair("zXAVANDERsupply", zXAVANDERObj));
+    result.emplace_back(Pair("zXCZMsupply", zXAVANDERObj));
 
     return result;
 }
@@ -279,7 +279,7 @@ Value getblock(const Array& params, bool fHelp)
             "  \"previousblockhash\" : \"hash\",  (string) The hash of the previous block\n"
             "  \"nextblockhash\" : \"hash\"       (string) The hash of the next block\n"
             "  \"moneysupply\" : \"supply\"       (numeric) The money supply when this block was added to the blockchain\n"
-            "  \"zXAVANDERsupply\" :\n"
+            "  \"zXCZMsupply\" :\n"
             "  {\n"
             "     \"1\" : n,            (numeric) supply of 1 zXAVANDER denomination\n"
             "     \"5\" : n,            (numeric) supply of 5 zXAVANDER denomination\n"
