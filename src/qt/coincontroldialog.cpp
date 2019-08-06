@@ -359,10 +359,10 @@ void CoinControlDialog::select_50() //select the first 50 inputs
 
 void CoinControlDialog::select_100() //select the first 100 inputs 
 {
-    if (ui->treeWidget->topLevelItemCount() > 99){ //check we have more then 50 inputs 
+    if (ui->treeWidget->topLevelItemCount() > 99){ //check we have more then 100 inputs 
         Qt::CheckState state = Qt::Checked;   
         ui->treeWidget->setEnabled(false);
-    for (int i = 0; i < 50; i++)
+    for (int i = 0; i < 100; i++)
         if (ui->treeWidget->topLevelItem(i)->checkState(COLUMN_CHECKBOX) != state)
             ui->treeWidget->topLevelItem(i)->setCheckState(COLUMN_CHECKBOX, state);
             ui->treeWidget->setEnabled(true);
@@ -381,10 +381,10 @@ void CoinControlDialog::select_100() //select the first 100 inputs
 
 void CoinControlDialog::select_250() //select the first 250 inputs 
 {
-    if (ui->treeWidget->topLevelItemCount() > 249){ //check we have more then 50 inputs 
+    if (ui->treeWidget->topLevelItemCount() > 249){ //check we have more then 250 inputs 
         Qt::CheckState state = Qt::Checked;   
         ui->treeWidget->setEnabled(false);
-    for (int i = 0; i < 50; i++)
+    for (int i = 0; i < 250; i++)
         if (ui->treeWidget->topLevelItem(i)->checkState(COLUMN_CHECKBOX) != state)
             ui->treeWidget->topLevelItem(i)->setCheckState(COLUMN_CHECKBOX, state);
             ui->treeWidget->setEnabled(true);
