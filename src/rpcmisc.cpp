@@ -66,7 +66,7 @@ Value getinfo(const Array& params, bool fHelp)
 			"  \"difficulty\": xxxxxx,       (numeric) the current difficulty\n"
             "  \"testnet\": true|false,      (boolean) if the server is using testnet or not\n"
             "  \"moneysupply\" : \"supply\"       (numeric) The money supply when this block was added to the blockchain\n"
-            "  \"zXAVANDERsupply\" :\n"
+            "  \"zXCZMsupply\" :\n"
             "  {\n"
             "     \"1\" : n,            (numeric) supply of 1 zXAVANDER denomination\n"
             "     \"5\" : n,            (numeric) supply of 5 zXAVANDER denomination\n"
@@ -114,7 +114,7 @@ Value getinfo(const Array& params, bool fHelp)
         zXAVANDERObj.push_back(Pair(to_string(denom), ValueFromAmount(chainActive.Tip()->mapZerocoinSupply.at(denom) * (denom*COIN))));
     }
     zXAVANDERObj.emplace_back(Pair("total", ValueFromAmount(chainActive.Tip()->GetZerocoinSupply())));
-    obj.emplace_back(Pair("zXAVANDERsupply", zXAVANDERObj));
+    obj.emplace_back(Pair("zXCZMsupply", zXAVANDERObj));
     
 #ifdef ENABLE_WALLET
     if (pwalletMain) {
