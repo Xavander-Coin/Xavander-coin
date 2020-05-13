@@ -102,7 +102,6 @@ public:
     CMainParams()
     {
         networkID = CBaseChainParams::MAIN;
-        vTreasuryRewardAddress = ""; //Fill in address once wallet generated or when dev fee is activated (TFinch)
         strNetworkID = "main";
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -126,7 +125,8 @@ public:
         nTargetSpacing = 1 * 60;  // Xavander: 1 minutes
         nMaturity = 10; // 10 Conf to mature coins
         nMasternodeCountDrift = 20;
-		nMasternodeCollateralAmt = 10000; //masternode collateral
+		nMasternodeCollateralAmt = 10000;
+        nMasternodeCollateralAmtNew = 50000;
         nMaxMoneyOut = 55000000 * COIN;
 
         /** Height or Time Based Activations **/
@@ -225,22 +225,6 @@ public:
         return data;
     }
 };
-
- std::string CChainParams::GetTreasuryRewardAddressAtHeight(int nHeight) const
-{
-    return vTreasuryRewardAddress;
-    
-}
-
-     CScript CChainParams::GetTreasuryRewardScriptAtHeight(int nHeight) const
-{
-    CBitcoinAddress address(GetTreasuryRewardAddressAtHeight(nHeight).c_str());
-    assert(address.IsValid());
-    CScript script = GetScriptForDestination(address.Get());
-    return script;
-    
-}
-
 
 static CMainParams mainParams;
 

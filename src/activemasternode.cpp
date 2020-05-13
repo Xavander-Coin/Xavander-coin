@@ -10,6 +10,7 @@
 #include "masternodeman.h"
 #include "protocol.h"
 #include "spork.h"
+#include "main.h"
 
 //
 // Bootup the Masternode, look for a 10000 XAVANDER input and register on the network
@@ -472,8 +473,7 @@ vector<COutput> CActiveMasternode::SelectCoinsMasternode()
 
     // Filter
     BOOST_FOREACH (const COutput& out, vCoins) {
-        if (out.tx->vout[out.i].nValue == Params().MasternodeCollateralAmt() * COIN) { //Was 5000 * COIN
-		//if (out.tx->vout[out.i].nValue == 10000 * COIN){
+        if (out.tx->vout[out.i].nValue == GetCurrentCollateral() * COIN) {
             filteredCoins.push_back(out);
         }
     }
