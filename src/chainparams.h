@@ -124,12 +124,7 @@ public:
 
 	//Central Collateral Amount
 	int MasternodeCollateralAmt() const { return nMasternodeCollateralAmt; }
-
-	//Treasury Code
-	std::string vTreasuryRewardAddress;
-    
-        std::string GetTreasuryRewardAddressAtHeight(int height) const;
-    CScript GetTreasuryRewardScriptAtHeight(int height) const;
+    int MasternodeCollateralAmtNew() const { return nMasternodeCollateralAmtNew; }
 
 protected:
     CChainParams() {}
@@ -140,6 +135,7 @@ protected:
     std::vector<unsigned char> vAlertPubKey;
     int nDefaultPort;
 	int nMasternodeCollateralAmt;
+    int nMasternodeCollateralAmtNew;
     uint256 bnProofOfWorkLimit;
     int nMaxReorganizationDepth;
     int nSubsidyHalvingInterval;

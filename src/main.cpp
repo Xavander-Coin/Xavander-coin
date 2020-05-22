@@ -2103,6 +2103,13 @@ bool ReadBlockFromDisk(CBlock& block, const CBlockIndex* pindex)
     return true;
 }
 
+CAmount GetCurrentCollateral()
+{
+    if (ActiveProtocol() >= COLLATERAL_FORK_VERSION && chainActive.Height() >= COLLATERAL_FORK_BLOCK)
+        return Params().MasternodeCollateralAmtNew();
+    else
+        return Params().MasternodeCollateralAmt();
+}
 
 double ConvertBitsToDouble(unsigned int nBits)
 {
@@ -2138,11 +2145,6 @@ int64_t GetBlockValue(int nHeight)
 		}
 	}
 
-	if (IsTreasuryBlock(nHeight)) {
-		LogPrintf("GetBlockValue(): this is a treasury block\n");
-		nSubsidy = GetTreasuryAward(nHeight);
-
-	}else {
 		if (nHeight == 0) {
 			nSubsidy = 2500000 * COIN;
 		}else if (nHeight <= 200 && nHeight > 1) {
@@ -2167,15 +2169,17 @@ int64_t GetBlockValue(int nHeight)
 			nSubsidy = 1.5 * COIN;
 		}else if (nHeight <= 306510 && nHeight > 205600) {
 			nSubsidy = 1.5 * COIN;
-		}else {
+        } else if (nHeight <= 1000000 && nHeight > 306510) {
 			nSubsidy = 1 * COIN;
+        } else {
+            nSubsidy = 7 * COIN;
 		}
 		int64_t nMoneySupply = chainActive.Tip()->nMoneySupply;
 		if (nMoneySupply + nSubsidy >= Params().MaxMoneyOut())
 			nSubsidy = Params().MaxMoneyOut() - nMoneySupply;
 		if (nMoneySupply >= Params().MaxMoneyOut())
 			nSubsidy = 0;
-	}
+	
 	return nSubsidy;
 }
 
@@ -2187,30 +2191,12 @@ int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCou
 		ret = blockValue * 0;
 	}else if (nHeight < 200 && nHeight > 1) {
 		ret = blockValue * 0; 
-	}else if (nHeight > 200) {
+	}else if (nHeight > 200 && nHeight <= 1000000) {
 		ret = blockValue / 10 * 9;
-	}return ret;
-}
-
-//Make sure Treasury is set to max and able to be used at later date if wanted to be
-int nStartTreasuryBlock = INT_MAX;
-int nTreasuryBlockStep = INT_MAX;
-//Checks to see if block count above is correct if not then no Treasury
-bool IsTreasuryBlock(int nHeight)
-{
-    if (nHeight < nStartTreasuryBlock)
-        return false;
-    else if ((nHeight - nStartTreasuryBlock) % nTreasuryBlockStep == 0)
-        return true;
-    else
-        return false;
-}
-
-int64_t GetTreasuryAward(int nHeight)
-{
-	if (IsTreasuryBlock(nHeight)) {
-		return 0;
+    } else if (nHeight > 1000000) {
+        ret = blockValue / 10 * 8.6;
 	}
+	return ret;
 }
 
 bool IsInitialBlockDownload()
